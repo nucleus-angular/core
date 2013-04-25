@@ -1,0 +1,40 @@
+/* messages */
+.nag-message {
+  padding: 0.5em;
+}
+
+.nag-message.nag-message-error {
+  border: 1px solid $color-error-dark;
+}
+
+.nag-message.nag-message-warning {
+  border: 1px solid $color-warning-dark;
+}
+
+.nag-message.nag-message-notice {
+  border: 1px solid $color-notice-dark;
+}
+
+.nag-message.nag-message-success {
+  border: 1px solid $color-success-dark;
+}
+
+.nag-message-error {
+  background-color: $color-error-light;
+  color: $color-error-dark;
+}
+
+.nag-message-warning {
+  background-color: $color-warning-light;
+  color: $color-warning-dark;
+}
+
+.nag-message-notice {
+  background-color: $color-notice-light;
+  color: $color-notice-dark;
+}
+
+.nag-message-success {
+  background-color: $color-success-light;
+  color: $color-success-dark;
+}
