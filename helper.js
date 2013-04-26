@@ -14,33 +14,32 @@ angular.module('nag.core.helpers', [])
         var html = $templateCache.get(templateUrl);
 
         if(!html) {
-            html = $.ajax({
-                type: "GET",
-                url: templateUrl,
-                async: false
-            }).responseText;
-            $templateCache.put(templateUrl, html);
+          html = $.ajax({
+            type: "GET",
+            url: templateUrl,
+            async: false
+          }).responseText;
+          $templateCache.put(templateUrl, html);
         }
 
         return html;
       },
 
       generateId: function(prefix) {
-          return prefix + ($('[id^=' + prefix + ']').length + 1);
+        return prefix + ($('[id^=' + prefix + ']').length + 1);
       },
 
-      defaultValue: function(variable, defaultValue) {
-          return (!_.isUndefined(variable) && !_(variable).isNull()) ? variable : defaultValue;
-      },
+      getTemplateString: function(options, templateUrlProperty, templateNameProperty) {
+        templateNameProperty = templateNameProperty || 'template';
+        templateUrlProperty = templateUrlProperty || 'templateUrl';
 
-      getTemplateString: function(options) {
-          if(angular.isString(options.template) && options.template.length > 0) {
-              return options.template;
-          } else if (angular.isString(options.templateUrl) && options.templateUrl.length > 0) {
-              return this.getAsyncTemplate(options.templateUrl, options);
-          } else {
-              return '';
-          }
+        if(angular.isString(options[templateNameProperty]) && options[templateNameProperty].length > 0) {
+          return options[templateNameProperty];
+        } else if (angular.isString(options[templateUrlProperty]) && options[templateUrlProperty].length > 0) {
+          return this.getAsyncTemplate(options[templateUrlProperty], options);
+        } else {
+          return '';
+        }
       },
 
       resolveTemplatePath: function(templatePath, options) {

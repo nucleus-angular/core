@@ -16,7 +16,7 @@ angular.module('nag.core.defaults', [])
       grid: {
         rootTemplatePath: rootTemplatePath + '/nucleus-angular-grid',
         caption: null,
-        columnModel: [],
+        columnModel: {},
         currentPage: 1,
         data: [],
         displaySettings: false,
