@@ -16,6 +16,6 @@ files = [
 
 autoWatch = false;
 
-browsers = ['Chrome'/*, 'Firefox', 'Safari', 'Opera'*/];
+browsers = ['Chrome', 'Firefox', 'Safari', 'Opera'];
 
 singleRun = true;
