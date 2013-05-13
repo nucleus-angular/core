@@ -55,7 +55,7 @@ describe('Defaults', function(){
     }
     var actual = nagDefaults.getGridOptions({});
 
-    expect((actual['generateDataUrl']).toString()).toEqual((expected['generateDataUrl']).toString());
+    expect(_.isFunction(actual['generateDataUrl'])).toBe(true);
 
     delete actual['generateDataUrl'];
     delete expected['generateDataUrl'];
@@ -216,10 +216,10 @@ describe('Defaults', function(){
 
     var actual = nagDefaults.getExtendTextOptions({});
 
-    expect((actual['autoCompleteOptions']['generateDataUrl']).toString()).toEqual((expected['autoCompleteOptions']['generateDataUrl']).toString());
-    expect((actual['autoCompleteOptions']['dataParser']).toString()).toEqual((expected['autoCompleteOptions']['dataParser']).toString());
-    expect((actual['autoCompleteOptions']['formatVariable']).toString()).toEqual((expected['autoCompleteOptions']['formatVariable']).toString());
-    expect((actual['autoCompleteOptions']['filter']).toString()).toEqual((expected['autoCompleteOptions']['filter']).toString());
+    expect(_.isFunction(actual['autoCompleteOptions']['generateDataUrl'])).toBe(true);
+    expect(_.isFunction(actual['autoCompleteOptions']['dataParser'])).toBe(true);
+    expect(_.isFunction(actual['autoCompleteOptions']['formatVariable'])).toBe(true);
+    expect(_.isFunction(actual['autoCompleteOptions']['filter'])).toBe(true);
 
     delete actual['autoCompleteOptions']['generateDataUrl'];
     delete actual['autoCompleteOptions']['dataParser'];
