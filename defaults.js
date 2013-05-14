@@ -14,7 +14,7 @@ angular.module('nag.core.defaults', [])
 
     var defaults = {
       grid: {
-        rootTemplatePath: rootTemplatePath + '/nucleus-angular-grid',
+        rootTemplatePath: rootTemplatePath + '/nucleus-angular-grid/assets/templates',
         caption: null,
         columnModel: {},
         currentPage: 1,
@@ -55,7 +55,7 @@ angular.module('nag.core.defaults', [])
         template: null
       },
       gridColumnModel: {
-        rootTemplatePath: rootTemplatePath + '/nucleus-angular-grid',
+        rootTemplatePath: rootTemplatePath + '/nucleus-angular-grid/assets/templates',
         title: null,
         property: null,
         headerTemplateUrl: 'grid/header-data-cell/header-data-cell.html',
@@ -73,19 +73,19 @@ angular.module('nag.core.defaults', [])
         cssHeaderClass: ''
       },
       tree: {
-        rootTemplatePath: rootTemplatePath + '/nucleus-angular-tree',
+        rootTemplatePath: rootTemplatePath + '/nucleus-angular-tree/assets/templates',
         templateUrl: 'tree.html',
         recursionTemplateUrl: 'recursion.html',
         data: []
       },
       tooltip: {
-        rootTemplatePath: rootTemplatePath + '/nucleus-angular-tooltip',
+        rootTemplatePath: rootTemplatePath + '/nucleus-angular-tooltip/assets/templates',
         verticalPosition: 'bottom', //top, middle, bottom
         horizontalPosition: 'right', //left, middle, right
         sticky: false
       },
       extendText: {
-        rootTemplatePath: rootTemplatePath + '/nucleus-angular-extend-text',
+        rootTemplatePath: rootTemplatePath + '/nucleus-angular-extend-text/assets/templates',
         hiddenInputName: null,
         visibleInputName: null,
         selectOnFocus: false, //whether or not to select the existing text in the input when focusing
@@ -97,14 +97,14 @@ angular.module('nag.core.defaults', [])
         template: null
       },
       extendTextTagOptions: {
-        rootTemplatePath: rootTemplatePath + '/nucleus-angular-extend-text',
+        rootTemplatePath: rootTemplatePath + '/nucleus-angular-extend-text/assets/templates',
         enabled: false,
         allowDuplicates: false,
         selectedTagIndex: null,
         doubleClickEdit: false
       },
       extendTextAutoCompleteOptions: {
-        rootTemplatePath: rootTemplatePath + '/nucleus-angular-extend-text',
+        rootTemplatePath: rootTemplatePath + '/nucleus-angular-extend-text/assets/templates',
         enabled: false,
         display: false,
         url: null,

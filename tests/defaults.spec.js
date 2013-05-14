@@ -13,7 +13,7 @@ describe('Defaults', function(){
 
   it('should have correct defaults for grid', function() {
     var expected = {
-      rootTemplatePath: nagDefaults.getRootTemplatePath() + '/nucleus-angular-grid',
+      rootTemplatePath: nagDefaults.getRootTemplatePath() + '/nucleus-angular-grid/assets/templates',
       caption: null,
       columnModel: {},
       currentPage: 1,
@@ -66,7 +66,7 @@ describe('Defaults', function(){
   it('should have correct defaults for grid column', function() {
     var expected = {
       test: {
-        rootTemplatePath: nagDefaults.getRootTemplatePath() + '/nucleus-angular-grid',
+        rootTemplatePath: nagDefaults.getRootTemplatePath() + '/nucleus-angular-grid/assets/templates',
         title: null,
         property: null,
         headerTemplateUrl: 'grid/header-data-cell/header-data-cell.html',
@@ -90,7 +90,7 @@ describe('Defaults', function(){
   it('should have correct defaults for grid column with multiple items', function() {
     var expected = {
       test: {
-        rootTemplatePath: nagDefaults.getRootTemplatePath() + '/nucleus-angular-grid',
+        rootTemplatePath: nagDefaults.getRootTemplatePath() + '/nucleus-angular-grid/assets/templates',
         title: null,
         property: null,
         headerTemplateUrl: 'grid/header-data-cell/header-data-cell.html',
@@ -108,7 +108,7 @@ describe('Defaults', function(){
         cssHeaderClass: ''
       },
       test2: {
-        rootTemplatePath: nagDefaults.getRootTemplatePath() + '/nucleus-angular-grid',
+        rootTemplatePath: nagDefaults.getRootTemplatePath() + '/nucleus-angular-grid/assets/templates',
         title: null,
         property: null,
         headerTemplateUrl: 'grid/header-data-cell/header-data-cell.html',
@@ -131,7 +131,7 @@ describe('Defaults', function(){
 
   it('should have correct defaults for tree', function() {
     var expected = {
-      rootTemplatePath: nagDefaults.getRootTemplatePath() + '/nucleus-angular-tree',
+      rootTemplatePath: nagDefaults.getRootTemplatePath() + '/nucleus-angular-tree/assets/templates',
       templateUrl: 'tree.html',
       recursionTemplateUrl: 'recursion.html',
       data: []
@@ -141,7 +141,7 @@ describe('Defaults', function(){
 
   it('should have correct defaults for tooltip', function() {
     var expected = {
-      rootTemplatePath: nagDefaults.getRootTemplatePath() + '/nucleus-angular-tooltip',
+      rootTemplatePath: nagDefaults.getRootTemplatePath() + '/nucleus-angular-tooltip/assets/templates',
       verticalPosition: 'bottom', //top, middle, bottom
       horizontalPosition: 'right', //left, middle, right
       sticky: false
@@ -151,7 +151,7 @@ describe('Defaults', function(){
 
   it('should have correct defaults for extend text', function() {
     var expected = {
-      rootTemplatePath: nagDefaults.getRootTemplatePath() + '/nucleus-angular-extend-text',
+      rootTemplatePath: nagDefaults.getRootTemplatePath() + '/nucleus-angular-extend-text/assets/templates',
       hiddenInputName: null,
       visibleInputName: null,
       selectOnFocus: false,
@@ -162,14 +162,14 @@ describe('Defaults', function(){
       templateUrl: 'extend-text/extend-text.html',
       template: null,
       tagOptions: {
-        rootTemplatePath: nagDefaults.getRootTemplatePath() + '/nucleus-angular-extend-text',
+        rootTemplatePath: nagDefaults.getRootTemplatePath() + '/nucleus-angular-extend-text/assets/templates',
         enabled: false,
         allowDuplicates: false,
         selectedTagIndex: null,
         doubleClickEdit: false
       },
       autoCompleteOptions: {
-        rootTemplatePath: nagDefaults.getRootTemplatePath() + '/nucleus-angular-extend-text',
+        rootTemplatePath: nagDefaults.getRootTemplatePath() + '/nucleus-angular-extend-text/assets/templates',
         enabled: false,
         display: false,
         url: null,
