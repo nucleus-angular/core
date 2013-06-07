@@ -1,8 +1,7 @@
 {
   "name": "nucleus-angular-core",
-  "version": "0.2.1",
-  "dependencies": {
-  },
+  "version": "0.2.2",
+  "dependencies": {},
   "devDependencies": {
     "jquery": "1.9.x",
     "lodash": "1.2.1",
@@ -11,4 +10,3 @@
     "unstable-angular-complete": "1.1.4"
   }
 }
-

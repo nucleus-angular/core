@@ -159,7 +159,7 @@ describe('Defaults', function(){
       data: [],
       ngModel: null,
       autoFocus: false,
-      templateUrl: 'extend-text/extend-text.html',
+      templateUrl: 'extend-text.html',
       template: null,
       tagOptions: {
         rootTemplatePath: nagDefaults.getRootTemplatePath() + '/nucleus-angular-extend-text/assets/templates',
