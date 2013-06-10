@@ -3,6 +3,7 @@ angular.module('nag.core.helpers', [])
   '$templateCache',
   'nagDefaults',
   function($templateCache, nagDefaults) {
+    var idGeneratorNumber = 0;
     return {
       getAsyncTemplate: function(templateUrl, options) {
         //todo: figure out if there is a way to using $http instead of jQuery $.ajax with async false without having the render of initial load
@@ -26,7 +27,8 @@ angular.module('nag.core.helpers', [])
       },
 
       generateId: function(prefix) {
-        return prefix + ($('[id^=' + prefix + ']').length + 1);
+        idGeneratorNumber += 1;
+        return prefix + idGeneratorNumber;
       },
 
       getTemplateString: function(options, templateUrlProperty, templateNameProperty) {
