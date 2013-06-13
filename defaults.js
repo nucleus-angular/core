@@ -150,6 +150,13 @@ angular.module('nag.core.defaults', [])
       },
       tabs: {
         defaultTab: 0
+      },
+      revealingPanel: {
+        rootTemplatePath: '',
+        position: 'right',
+        escapeClose: false,
+        hasOverlay: true,
+        overlayClickClose: false
       }
     };
 
@@ -217,6 +224,12 @@ angular.module('nag.core.defaults', [])
 
       getTabsOptions: function(options) {
         return angular.extend(defaults.tabs, options);
+      },
+
+      getRevealingPanelOptions: function(options) {
+        var finalOptions = _.clone(defaults.revealingPanel);
+        angular.extend(finalOptions, options);
+        return finalOptions;
       }
     }
   }

@@ -31,17 +31,17 @@ describe('Defaults', function(){
       rowSelectable: false,
       rowSelectableCheckbox: true,
       rowSelectionMode: 'row',
-      headerTemplateUrl: 'grid/header/header.html',
+      headerTemplateUrl: 'header.html',
       headerTemplate: null,
-      footerTemplateUrl: 'grid/footer/footer.html',
+      footerTemplateUrl: 'footer.html',
       footerTemplate: null,
-      settingsTemplateUrl: 'grid/settings/settings.html',
+      settingsTemplateUrl: 'settings.html',
       settingsTemplate: null,
-      loadingTemplateUrl: 'grid/loading/loading.html',
+      loadingTemplateUrl: 'loading.html',
       loadingTemplate: null,
-      dataTemplateUrl: 'grid/data/data.html',
+      dataTemplateUrl: 'data.html',
       dataTemplate: null,
-      actionsTemplateUrl: 'grid/actions/actions.html',
+      actionsTemplateUrl: 'actions.html',
       actionsTemplate: null,
       rowShiftMultiSelect: false,
       selected: [],
@@ -50,7 +50,7 @@ describe('Defaults', function(){
       sortMulti: true,
       sortProperty: null,
       totalRecords: 0,
-      templateUrl: 'grid/grid.html',
+      templateUrl: 'grid.html',
       template: null
     }
     var actual = nagDefaults.getGridOptions({});
@@ -69,9 +69,9 @@ describe('Defaults', function(){
         rootTemplatePath: nagDefaults.getRootTemplatePath() + '/nucleus-angular-grid/assets/templates',
         title: null,
         property: null,
-        headerTemplateUrl: 'grid/header-data-cell/header-data-cell.html',
+        headerTemplateUrl: 'header-data-cell.html',
         headerTemplate: null,
-        templateUrl: 'grid/data-cell/data-cell.html',
+        templateUrl: 'data-cell.html',
         template: null,
         display: true,
         sortable: false,
@@ -93,9 +93,9 @@ describe('Defaults', function(){
         rootTemplatePath: nagDefaults.getRootTemplatePath() + '/nucleus-angular-grid/assets/templates',
         title: null,
         property: null,
-        headerTemplateUrl: 'grid/header-data-cell/header-data-cell.html',
+        headerTemplateUrl: 'header-data-cell.html',
         headerTemplate: null,
-        templateUrl: 'grid/data-cell/data-cell.html',
+        templateUrl: 'data-cell.html',
         template: null,
         display: true,
         sortable: false,
@@ -111,9 +111,9 @@ describe('Defaults', function(){
         rootTemplatePath: nagDefaults.getRootTemplatePath() + '/nucleus-angular-grid/assets/templates',
         title: null,
         property: null,
-        headerTemplateUrl: 'grid/header-data-cell/header-data-cell.html',
+        headerTemplateUrl: 'header-data-cell.html',
         headerTemplate: null,
-        templateUrl: 'grid/data-cell/data-cell.html',
+        templateUrl: 'data-cell.html',
         template: null,
         display: true,
         sortable: false,
@@ -142,8 +142,8 @@ describe('Defaults', function(){
   it('should have correct defaults for tooltip', function() {
     var expected = {
       rootTemplatePath: nagDefaults.getRootTemplatePath() + '/nucleus-angular-tooltip/assets/templates',
-      verticalPosition: 'bottom', //top, middle, bottom
-      horizontalPosition: 'right', //left, middle, right
+      verticalPosition: 'bottom',
+      horizontalPosition: 'right',
       sticky: false
     }
     expect(nagDefaults.getTooltipOptions({})).toEqual(expected);
