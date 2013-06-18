@@ -153,8 +153,9 @@ angular.module('nag.core.defaults', [])
       },
       revealingPanel: {
         rootTemplatePath: '',
+        contentTemplateUrl: null,
         position: 'right',
-        escapeClose: false,
+        escapeClose: true,
         hasOverlay: true,
         overlayClickClose: false
       }
@@ -178,7 +179,8 @@ angular.module('nag.core.defaults', [])
       },
 
       getGridOptions: function(options) {
-        var newOptions = angular.extend(defaults.grid, options);
+        var gripOptions = _.clone(defaults.grid);
+        var newOptions = angular.extend(gripOptions, options);
 
         if(angular.isArray(options.columnModel) && options.columnModel.length > 0) {
             options.columnModel = this.getGridColumnOptions(options.columnModel);
@@ -188,33 +190,43 @@ angular.module('nag.core.defaults', [])
       },
 
       getGridColumnOptions: function(columnModel) {
+        var gridColumnOptions = _.clone(defaults.gridColumnModel);
+
         angular.forEach(columnModel, function(value, key) {
           //todo: research: this breaks without the JSON.parse(angular.toJson()), no idea why
-          columnModel[key] = angular.extend(JSON.parse(angular.toJson(defaults.gridColumnModel)), columnModel[key]);
+          columnModel[key] = angular.extend(JSON.parse(angular.toJson(gridColumnOptions)), columnModel[key]);
         });
 
         return columnModel;
       },
 
       getTreeOptions: function(options) {
-        return angular.extend(defaults.tree, options);
+        var treeOptions = _.clone(defaults.tree);
+        angular.extend(treeOptions, options);
+        return treeOptions;
       },
 
       getTooltipOptions: function(options) {
-        return angular.extend(defaults.tooltip, options);
+        var tooltipOptions = _.clone(defaults.tooltip);
+        angular.extend(tooltipOptions, options);
+        return tooltipOptions;
       },
 
       getExtendTextOptions: function(options) {
-        var results = angular.extend(defaults.extendText, options);
+        var extendTextDefaults = _.clone(defaults.extendText);
+        var extendTextTagDefaults = _.clone(defaults.extendTextTagOptions);
+        var extendTextAutoCompleteDefaults = _.clone(defaults.extendTextAutoCompleteOptions);
+
+        var results = angular.extend(extendTextDefaults, options);
 
         if(results.tagOptions) {
-          results.tagOptions = angular.extend(defaults.extendTextTagOptions, results.tagOptions);
+          results.tagOptions = angular.extend(extendTextTagDefaults, results.tagOptions);
         } else {
           results.tagOptions = defaults.extendTextTagOptions
         }
 
         if(results.autoCompleteOptions) {
-          results.autoCompleteOptions = angular.extend(defaults.extendTextAutoCompleteOptions, results.autoCompleteOptions);
+          results.autoCompleteOptions = angular.extend(extendTextAutoCompleteDefaults, results.autoCompleteOptions);
         } else {
           results.autoCompleteOptions = defaults.extendTextAutoCompleteOptions
         }
@@ -223,7 +235,9 @@ angular.module('nag.core.defaults', [])
       },
 
       getTabsOptions: function(options) {
-        return angular.extend(defaults.tabs, options);
+        var finalOptions = _.clone(defaults.tabs);
+        angular.extend(finalOptions, options);
+        return finalOptions;
       },
 
       getRevealingPanelOptions: function(options) {

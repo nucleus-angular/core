@@ -45,8 +45,14 @@ angular.module('nag.core.helpers', [])
       },
 
       resolveTemplatePath: function(templatePath, options) {
+        var rootPath = (options ? options.rootTemplatePath : nagDefaults.getRootTemplatePath());
+
+        if(rootPath !== '') {
+            rootPath += '/';
+        }
+
         return (templatePath.indexOf('./') !== 0 && templatePath.indexOf('/') !== 0
-        ? (options ? options.rootTemplatePath : nagDefaults.getRootTemplatePath()) + '/' + templatePath
+        ? rootPath + templatePath
         : templatePath);
       }
     }
