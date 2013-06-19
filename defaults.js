@@ -158,6 +158,9 @@ angular.module('nag.core.defaults', [])
         escapeClose: true,
         hasOverlay: true,
         overlayClickClose: false
+      },
+      expander: {
+        style: null
       }
     };
 
@@ -242,6 +245,12 @@ angular.module('nag.core.defaults', [])
 
       getRevealingPanelOptions: function(options) {
         var finalOptions = _.clone(defaults.revealingPanel);
+        angular.extend(finalOptions, options);
+        return finalOptions;
+      },
+
+      getExpanderOptions: function(options) {
+        var finalOptions = _.clone(defaults.expander);
         angular.extend(finalOptions, options);
         return finalOptions;
       }

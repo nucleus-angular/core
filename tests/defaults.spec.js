@@ -476,4 +476,24 @@ describe('Defaults', function(){
 
     expect(nagDefaults.getRevealingPanelOptions({})).toEqual(expected);
   });
+
+  it('should have correct defaults for expander', function() {
+    var expected = {
+      style: null
+    };
+
+    expect(nagDefaults.getExpanderOptions({})).toEqual(expected);
+  });
+
+  it('should not overwrite stored default settings for expander when retrieving defaults with a none empty object', function() {
+    nagDefaults.getExpanderOptions({
+      style: 'test'
+    });
+
+    var expected = {
+      style: null
+    };
+
+    expect(nagDefaults.getExpanderOptions({})).toEqual(expected);
+  });
 });
