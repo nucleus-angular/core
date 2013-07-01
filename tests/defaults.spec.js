@@ -8,7 +8,7 @@ describe('Defaults', function(){
   }));
 
   it('should have correct default root template path', function() {
-    expect(nagDefaults.getRootTemplatePath()).toEqual('/components');
+    expect(nagDefaults.getRootTemplatePath()).toEqual('components');
   });
 
   it('should have correct defaults for grid', function() {
@@ -256,12 +256,9 @@ describe('Defaults', function(){
   it('should have correct defaults for extend text', function() {
     var expected = {
       rootTemplatePath: nagDefaults.getRootTemplatePath() + '/nucleus-angular-extend-text/assets/templates',
-      hiddenInputName: null,
-      visibleInputName: null,
       selectOnFocus: false,
       preventSubmitOnEnter: true,
       data: [],
-      ngModel: null,
       autoFocus: false,
       templateUrl: 'extend-text.html',
       template: null,
@@ -286,6 +283,8 @@ describe('Defaults', function(){
         options: [],
         useFilter: null,
         selectedOptionIndex: 0,
+        selectOnBlur: true,
+        allowFreeForm: false,
         generateDataUrl: function() {
           var url = this.options.autoCompleteOptions.url;
           var variableValue = this.getTextAreaValue();
@@ -339,7 +338,7 @@ describe('Defaults', function(){
 
   it('should not overwrite stored default settings for extend text when retrieving defaults with a none empty object', function() {
     nagDefaults.getExtendTextOptions({
-      hiddenInputName: 'test',
+      autoFocus: true,
       tagOptions: {
         enabled: true
       },
@@ -350,12 +349,9 @@ describe('Defaults', function(){
 
     var expected = {
       rootTemplatePath: nagDefaults.getRootTemplatePath() + '/nucleus-angular-extend-text/assets/templates',
-      hiddenInputName: null,
-      visibleInputName: null,
       selectOnFocus: false,
       preventSubmitOnEnter: true,
       data: [],
-      ngModel: null,
       autoFocus: false,
       templateUrl: 'extend-text.html',
       template: null,
@@ -380,6 +376,8 @@ describe('Defaults', function(){
         options: [],
         useFilter: null,
         selectedOptionIndex: 0,
+        selectOnBlur: true,
+        allowFreeForm: false,
         generateDataUrl: function() {
           var url = this.options.autoCompleteOptions.url;
           var variableValue = this.getTextAreaValue();
@@ -429,6 +427,16 @@ describe('Defaults', function(){
     delete expected['autoCompleteOptions']['filter'];
 
     expect(actual).toEqual(expected);
+  });
+
+  it('the data for the extend text should be be shared accross multiple instances', function() {
+    var options1 = nagDefaults.getExtendTextOptions({});
+    var options2 = nagDefaults.getExtendTextOptions({});
+
+    options1.data.push({value: 'test', display: 'Test'});
+
+    expect(options1.data).toEqual([{value: 'test', display: 'Test'}]);
+    expect(options2.data).toEqual([]);
   });
 
   it('should have correct defaults for tabs', function() {
@@ -495,5 +503,24 @@ describe('Defaults', function(){
     };
 
     expect(nagDefaults.getExpanderOptions({})).toEqual(expected);
+  });
+
+  it('should have correct defaults for input element', function() {
+    var expected = {
+      isPlain: true
+    };
+
+    expect(nagDefaults.getInputElementOptions({})).toEqual(expected);
+  });
+
+  it('should not overwrite stored default settings for input element when retrieving defaults with a none empty object', function() {
+    nagDefaults.getInputElementOptions({
+      isPlain: false
+    });
+    var expected = {
+      isPlain: true
+    };
+
+    expect(nagDefaults.getInputElementOptions({})).toEqual(expected);
   });
 });

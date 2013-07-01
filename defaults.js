@@ -9,7 +9,7 @@ angular.module('nag.core.defaults', [])
       rootTemplatePath = $injector.get('nag.rootTemplatePath');
     }
     catch(exception) {
-      rootTemplatePath = '/components';
+      rootTemplatePath = 'components';
     }
 
     var defaults = {
@@ -86,12 +86,9 @@ angular.module('nag.core.defaults', [])
       },
       extendText: {
         rootTemplatePath: rootTemplatePath + '/nucleus-angular-extend-text/assets/templates',
-        hiddenInputName: null,
-        visibleInputName: null,
         selectOnFocus: false, //whether or not to select the existing text in the input when focusing
         preventSubmitOnEnter: true,
         data: [],
-        ngModel: null,
         autoFocus: false,
         templateUrl: 'extend-text.html',
         template: null
@@ -117,6 +114,8 @@ angular.module('nag.core.defaults', [])
         options: [],
         useFilter: null, //todo
         selectedOptionIndex: 0,
+        selectOnBlur: true,
+        allowFreeForm: false,
         generateDataUrl: function() {
           var url = this.options.autoCompleteOptions.url;
           var variableValue = this.getTextAreaValue();
@@ -124,7 +123,11 @@ angular.module('nag.core.defaults', [])
           url += (url.indexOf('?') === -1 ? '?' : '&');
           url += this.options.autoCompleteOptions.variable + '=' + this.options.autoCompleteOptions.formatVariable(variableValue);
 
-          return url + '&callback=JSON_CALLBACK';
+          if(this.options.autoCompleteOptions.remoteDataMethod === 'JSONP') {
+            url += '&callback=JSON_CALLBACK';
+          }
+
+          return url;
         },
         remoteDataMethod: 'JSONP',
         loadingData: false,
@@ -161,6 +164,9 @@ angular.module('nag.core.defaults', [])
       },
       expander: {
         style: null
+      },
+      inputElement: {
+        isPlain: true
       }
     };
 
@@ -182,7 +188,7 @@ angular.module('nag.core.defaults', [])
       },
 
       getGridOptions: function(options) {
-        var gripOptions = _.clone(defaults.grid);
+        var gripOptions = _.clone(defaults.grid, true);
         var newOptions = angular.extend(gripOptions, options);
 
         if(angular.isArray(options.columnModel) && options.columnModel.length > 0) {
@@ -193,7 +199,7 @@ angular.module('nag.core.defaults', [])
       },
 
       getGridColumnOptions: function(columnModel) {
-        var gridColumnOptions = _.clone(defaults.gridColumnModel);
+        var gridColumnOptions = _.clone(defaults.gridColumnModel, true);
 
         angular.forEach(columnModel, function(value, key) {
           //todo: research: this breaks without the JSON.parse(angular.toJson()), no idea why
@@ -204,21 +210,21 @@ angular.module('nag.core.defaults', [])
       },
 
       getTreeOptions: function(options) {
-        var treeOptions = _.clone(defaults.tree);
+        var treeOptions = _.clone(defaults.tree, true);
         angular.extend(treeOptions, options);
         return treeOptions;
       },
 
       getTooltipOptions: function(options) {
-        var tooltipOptions = _.clone(defaults.tooltip);
+        var tooltipOptions = _.clone(defaults.tooltip, true);
         angular.extend(tooltipOptions, options);
         return tooltipOptions;
       },
 
       getExtendTextOptions: function(options) {
-        var extendTextDefaults = _.clone(defaults.extendText);
-        var extendTextTagDefaults = _.clone(defaults.extendTextTagOptions);
-        var extendTextAutoCompleteDefaults = _.clone(defaults.extendTextAutoCompleteOptions);
+        var extendTextDefaults = _.clone(defaults.extendText, true);
+        var extendTextTagDefaults = _.clone(defaults.extendTextTagOptions, true);
+        var extendTextAutoCompleteDefaults = _.clone(defaults.extendTextAutoCompleteOptions, true);
 
         var results = angular.extend(extendTextDefaults, options);
 
@@ -238,19 +244,25 @@ angular.module('nag.core.defaults', [])
       },
 
       getTabsOptions: function(options) {
-        var finalOptions = _.clone(defaults.tabs);
+        var finalOptions = _.clone(defaults.tabs, true);
         angular.extend(finalOptions, options);
         return finalOptions;
       },
 
       getRevealingPanelOptions: function(options) {
-        var finalOptions = _.clone(defaults.revealingPanel);
+        var finalOptions = _.clone(defaults.revealingPanel, true);
         angular.extend(finalOptions, options);
         return finalOptions;
       },
 
       getExpanderOptions: function(options) {
-        var finalOptions = _.clone(defaults.expander);
+        var finalOptions = _.clone(defaults.expander, true);
+        angular.extend(finalOptions, options);
+        return finalOptions;
+      },
+
+      getInputElementOptions: function(options) {
+        var finalOptions = _.clone(defaults.inputElement, true);
         angular.extend(finalOptions, options);
         return finalOptions;
       }
