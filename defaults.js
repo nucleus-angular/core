@@ -26,7 +26,7 @@ angular.module('nag.core.defaults', [])
         itemsPerPage: 10,
         maxColumnWidth: 0,
         minColumnWidth: 50,
-        remoteDataMethod: 'JSONP',
+        remoteDataMethod: 'GET',
         reorderable: false,//todo: implement
         rowMultiSelect: true,
         rowSelectable: false,
@@ -78,12 +78,6 @@ angular.module('nag.core.defaults', [])
         recursionTemplateUrl: 'recursion.html',
         data: []
       },
-      tooltip: {
-        rootTemplatePath: rootTemplatePath + '/nucleus-angular-tooltip/assets/templates',
-        verticalPosition: 'bottom', //top, middle, bottom
-        horizontalPosition: 'right', //left, middle, right
-        sticky: false
-      },
       extendText: {
         rootTemplatePath: rootTemplatePath + '/nucleus-angular-extend-text/assets/templates',
         selectOnFocus: false, //whether or not to select the existing text in the input when focusing
@@ -129,18 +123,18 @@ angular.module('nag.core.defaults', [])
 
           return url;
         },
-        remoteDataMethod: 'JSONP',
+        remoteDataMethod: 'GET',
         loadingData: false,
 
         //callbacks
-        dataParser: function(data) {
+        responseParser: function(data) {
           var parsedData, x;
           parsedData = [];
 
           for(x = 0; x < data.length; x += 1) {
             parsedData.push({
-              display: data[x].username,
-              value: data[x].id
+              display: data[x].display,
+              value: data[x].value
             });
           }
 
@@ -213,12 +207,6 @@ angular.module('nag.core.defaults', [])
         var treeOptions = _.clone(defaults.tree, true);
         angular.extend(treeOptions, options);
         return treeOptions;
-      },
-
-      getTooltipOptions: function(options) {
-        var tooltipOptions = _.clone(defaults.tooltip, true);
-        angular.extend(tooltipOptions, options);
-        return tooltipOptions;
       },
 
       getExtendTextOptions: function(options) {

@@ -25,7 +25,7 @@ describe('Defaults', function(){
       itemsPerPage: 10,
       maxColumnWidth: 0,
       minColumnWidth: 50,
-      remoteDataMethod: 'JSONP',
+      remoteDataMethod: 'GET',
       reorderable: false,
       rowMultiSelect: true,
       rowSelectable: false,
@@ -79,7 +79,7 @@ describe('Defaults', function(){
       itemsPerPage: 10,
       maxColumnWidth: 0,
       minColumnWidth: 50,
-      remoteDataMethod: 'JSONP',
+      remoteDataMethod: 'GET',
       reorderable: false,
       rowMultiSelect: true,
       rowSelectable: false,
@@ -231,28 +231,6 @@ describe('Defaults', function(){
     expect(nagDefaults.getTreeOptions({})).toEqual(expected);
   });
 
-  it('should have correct defaults for tooltip', function() {
-    var expected = {
-      rootTemplatePath: nagDefaults.getRootTemplatePath() + '/nucleus-angular-tooltip/assets/templates',
-      verticalPosition: 'bottom',
-      horizontalPosition: 'right',
-      sticky: false
-    }
-    expect(nagDefaults.getTooltipOptions({})).toEqual(expected);
-  });
-
-  it('should not overwrite stored default settings for tooltip when retrieving defaults with a none empty object', function() {
-    nagDefaults.getTooltipOptions({sticky: true});
-
-    var expected = {
-      rootTemplatePath: nagDefaults.getRootTemplatePath() + '/nucleus-angular-tooltip/assets/templates',
-      verticalPosition: 'bottom',
-      horizontalPosition: 'right',
-      sticky: false
-    }
-    expect(nagDefaults.getTooltipOptions({})).toEqual(expected);
-  });
-
   it('should have correct defaults for extend text', function() {
     var expected = {
       rootTemplatePath: nagDefaults.getRootTemplatePath() + '/nucleus-angular-extend-text/assets/templates',
@@ -294,10 +272,10 @@ describe('Defaults', function(){
 
           return url + '&callback=JSON_CALLBACK';
         },
-        remoteDataMethod: 'JSONP',
+        remoteDataMethod: 'GET',
         loadingData: false,
 
-        dataParser: function(data) {
+        responseParser: function(data) {
           var parsedData, x;
           parsedData = [];
 
@@ -320,16 +298,16 @@ describe('Defaults', function(){
     var actual = nagDefaults.getExtendTextOptions({});
 
     expect(_.isFunction(actual['autoCompleteOptions']['generateDataUrl'])).toBe(true);
-    expect(_.isFunction(actual['autoCompleteOptions']['dataParser'])).toBe(true);
+    expect(_.isFunction(actual['autoCompleteOptions']['responseParser'])).toBe(true);
     expect(_.isFunction(actual['autoCompleteOptions']['formatVariable'])).toBe(true);
     expect(_.isFunction(actual['autoCompleteOptions']['filter'])).toBe(true);
 
     delete actual['autoCompleteOptions']['generateDataUrl'];
-    delete actual['autoCompleteOptions']['dataParser'];
+    delete actual['autoCompleteOptions']['responseParser'];
     delete actual['autoCompleteOptions']['formatVariable'];
     delete actual['autoCompleteOptions']['filter'];
     delete expected['autoCompleteOptions']['generateDataUrl'];
-    delete expected['autoCompleteOptions']['dataParser'];
+    delete expected['autoCompleteOptions']['responseParser'];
     delete expected['autoCompleteOptions']['formatVariable'];
     delete expected['autoCompleteOptions']['filter'];
 
@@ -387,10 +365,10 @@ describe('Defaults', function(){
 
           return url + '&callback=JSON_CALLBACK';
         },
-        remoteDataMethod: 'JSONP',
+        remoteDataMethod: 'GET',
         loadingData: false,
 
-        dataParser: function(data) {
+        responseParser: function(data) {
           var parsedData, x;
           parsedData = [];
 
@@ -413,16 +391,16 @@ describe('Defaults', function(){
     var actual = nagDefaults.getExtendTextOptions({});
 
     expect(_.isFunction(actual['autoCompleteOptions']['generateDataUrl'])).toBe(true);
-    expect(_.isFunction(actual['autoCompleteOptions']['dataParser'])).toBe(true);
+    expect(_.isFunction(actual['autoCompleteOptions']['responseParser'])).toBe(true);
     expect(_.isFunction(actual['autoCompleteOptions']['formatVariable'])).toBe(true);
     expect(_.isFunction(actual['autoCompleteOptions']['filter'])).toBe(true);
 
     delete actual['autoCompleteOptions']['generateDataUrl'];
-    delete actual['autoCompleteOptions']['dataParser'];
+    delete actual['autoCompleteOptions']['responseParser'];
     delete actual['autoCompleteOptions']['formatVariable'];
     delete actual['autoCompleteOptions']['filter'];
     delete expected['autoCompleteOptions']['generateDataUrl'];
-    delete expected['autoCompleteOptions']['dataParser'];
+    delete expected['autoCompleteOptions']['responseParser'];
     delete expected['autoCompleteOptions']['formatVariable'];
     delete expected['autoCompleteOptions']['filter'];
 
