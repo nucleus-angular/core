@@ -1,9 +1,16 @@
+/**
+ * Handles generating defaults for Nucleus Angular
+ *
+ * @module nag.core
+ * @ngservice nagDefaults
+ */
 angular.module('nag.core.defaults', [])
 .factory('nagDefaults', [
   '$injector',
   function($injector) {
     var rootTemplatePath;
 
+    //todo: document
     //figure out the default root template path
     try {
       rootTemplatePath = $injector.get('nag.rootTemplatePath');
@@ -106,7 +113,6 @@ angular.module('nag.core.defaults', [])
         cache: false, //todo whether or not to cache the data from the remote server, useful for smaller datasets
         cachedData: [], //todo
         options: [],
-        useFilter: null, //todo
         selectedOptionIndex: 0,
         selectOnBlur: true,
         allowFreeForm: false,
@@ -127,14 +133,14 @@ angular.module('nag.core.defaults', [])
         loadingData: false,
 
         //callbacks
-        responseParser: function(data) {
+        responseParser: function(response) {
           var parsedData, x;
           parsedData = [];
 
-          for(x = 0; x < data.length; x += 1) {
+          for(x = 0; x < response.length; x += 1) {
             parsedData.push({
-              display: data[x].display,
-              value: data[x].value
+              display: response[x].username,
+              value: response[x].id
             });
           }
 
@@ -164,6 +170,7 @@ angular.module('nag.core.defaults', [])
       }
     };
 
+    //todo: document
     //apply override defaults
     try {
       var defaultOverrides, overrideKeys, x;
@@ -177,10 +184,26 @@ angular.module('nag.core.defaults', [])
     catch(exception) {}
 
     return {
+      /**
+       * Retrieves the configured root template path
+       *
+       * @method getRootTemplatePath
+       *
+       * @returns {string} Root template path
+       */
       getRootTemplatePath: function() {
         return rootTemplatePath;
       },
 
+      /**
+       * Builds grid options
+       *
+       * @method getGridOptions
+       *
+       * @param {object} options Overrides for the default options
+       *
+       * @returns {object} The default options merged with the passed options
+       */
       getGridOptions: function(options) {
         var gripOptions = _.clone(defaults.grid, true);
         var newOptions = angular.extend(gripOptions, options);
@@ -192,6 +215,15 @@ angular.module('nag.core.defaults', [])
         return newOptions;
       },
 
+      /**
+       * Builds grid column options
+       *
+       * @method getGridColumnOptions
+       *
+       * @param {object} options Overrides for the default options
+       *
+       * @returns {object} The default options merged with the passed options
+       */
       getGridColumnOptions: function(columnModel) {
         var gridColumnOptions = _.clone(defaults.gridColumnModel, true);
 
@@ -203,12 +235,30 @@ angular.module('nag.core.defaults', [])
         return columnModel;
       },
 
+      /**
+       * Builds tree options
+       *
+       * @method getTreeOptions
+       *
+       * @param {object} options Overrides for the default options
+       *
+       * @returns {object} The default options merged with the passed options
+       */
       getTreeOptions: function(options) {
         var treeOptions = _.clone(defaults.tree, true);
         angular.extend(treeOptions, options);
         return treeOptions;
       },
 
+      /**
+       * Builds extend text options
+       *
+       * @method getExtendTextOptions
+       *
+       * @param {object} options Overrides for the default options
+       *
+       * @returns {object} The default options merged with the passed options
+       */
       getExtendTextOptions: function(options) {
         var extendTextDefaults = _.clone(defaults.extendText, true);
         var extendTextTagDefaults = _.clone(defaults.extendTextTagOptions, true);
@@ -231,24 +281,60 @@ angular.module('nag.core.defaults', [])
         return results;
       },
 
+      /**
+       * Builds tabs options
+       *
+       * @method getTabsOptions
+       *
+       * @param {object} options Overrides for the default options
+       *
+       * @returns {object} The default options merged with the passed options
+       */
       getTabsOptions: function(options) {
         var finalOptions = _.clone(defaults.tabs, true);
         angular.extend(finalOptions, options);
         return finalOptions;
       },
 
+      /**
+       * Builds revealing panel options
+       *
+       * @method getRevealingPanelOptions
+       *
+       * @param {object} options Overrides for the default options
+       *
+       * @returns {object} The default options merged with the passed options
+       */
       getRevealingPanelOptions: function(options) {
         var finalOptions = _.clone(defaults.revealingPanel, true);
         angular.extend(finalOptions, options);
         return finalOptions;
       },
 
+      /**
+       * Builds expander options
+       *
+       * @method getExpanderOptions
+       *
+       * @param {object} options Overrides for the default options
+       *
+       * @returns {object} The default options merged with the passed options
+       */
       getExpanderOptions: function(options) {
         var finalOptions = _.clone(defaults.expander, true);
         angular.extend(finalOptions, options);
         return finalOptions;
       },
 
+      /**
+       * Builds input element options
+       *
+       * @method getInputElementOptions
+       *
+       * @param {object} options Overrides for the default options
+       *
+       * @returns {object} The default options merged with the passed options
+       */
       getInputElementOptions: function(options) {
         var finalOptions = _.clone(defaults.inputElement, true);
         angular.extend(finalOptions, options);

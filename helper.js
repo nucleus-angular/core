@@ -1,3 +1,9 @@
+/**
+ * General helper classes for Nucleus Angular
+ *
+ * @module nag.core
+ * @ngservice nagHelper
+ */
 angular.module('nag.core.helpers', [])
 .factory('nagHelper', [
   '$templateCache',
@@ -5,6 +11,19 @@ angular.module('nag.core.helpers', [])
   function($templateCache, nagDefaults) {
     var idGeneratorNumber = 0;
     return {
+      /**
+       * Retrieves a template
+       *
+       * NOTE: Right now this is using jQuery in an sync manor because of issues with the template not being ready when the data is (like in the grid component)
+       * so we need to take a look at this to see if it is something that can be changes
+       *
+       * @method getAsyncTemplate
+       *
+       * @param {string} templateUrl Remote path to the template file
+       * @param {object} options Options object
+       *
+       * @returns {string} Template HTML
+       */
       getAsyncTemplate: function(templateUrl, options) {
         //todo: figure out if there is a way to using $http instead of jQuery $.ajax with async false without having the render of initial load
         /*$http.get(template, {cache: $templateCache}).success(function(html) {
@@ -26,11 +45,32 @@ angular.module('nag.core.helpers', [])
         return html;
       },
 
+      /**
+       * Generates a unique id
+       *
+       * @method generateId
+       *
+       * @param {string} [prefix=''] String to prefix the id
+       *
+       * @returns {string} Unique id
+       */
       generateId: function(prefix) {
+        prefix = prefix || '';
         idGeneratorNumber += 1;
         return prefix + idGeneratorNumber;
       },
 
+      /**
+       * Retrieves a template string using either the template or templateUrl property of a component's options object
+       *
+       * @method
+       *
+       * @param {objects} options Options object
+       * @param {string} [templateUrlProperty='template'] Property name in which the template HTML would live
+       * @param {string} [templateNameProperty='templateUrl'] Property name in which the template file url would live
+       *
+       * @returns {*} Template HTML
+       */
       getTemplateString: function(options, templateUrlProperty, templateNameProperty) {
         templateNameProperty = templateNameProperty || 'template';
         templateUrlProperty = templateUrlProperty || 'templateUrl';
@@ -44,6 +84,16 @@ angular.module('nag.core.helpers', [])
         }
       },
 
+      /**
+       * Resolves the template path
+       *
+       * @method resolveTemplatePath
+       *
+       * @param {string} templatePath Template file url
+       * @param {object} options Options object
+       *
+       * @returns {string} Resolved template file url
+       */
       resolveTemplatePath: function(templatePath, options) {
         var rootPath = (options ? options.rootTemplatePath : nagDefaults.getRootTemplatePath());
 
