@@ -1,6 +1,6 @@
 {
   "name": "nucleus-angular-core",
-  "version": "0.2.9",
+  "version": "0.2.10",
   "dependencies": {},
   "devDependencies": {
     "jquery": "1.9.x",
