@@ -26,6 +26,15 @@ angular.module('nag.core', [
   //insert
   values.push(45);
 
+  //delete
+  values.push(46);
+
+  //enter
+  values.push(13);
+
+  //tab
+  values.push(9);
+
   //left window key
   values.push(91);
 
