@@ -90,7 +90,6 @@ angular.module('nag.core.defaults', [])
         selectOnFocus: false, //whether or not to select the existing text in the input when focusing
         preventSubmitOnEnter: true,
         data: [],
-        autoFocus: false,
         templateUrl: 'extend-text.html',
         template: null
       },
@@ -116,7 +115,7 @@ angular.module('nag.core.defaults', [])
         selectedOptionIndex: 0,
         selectOnBlur: false,
         allowFreeForm: false,
-        newText: 'New',
+        newText: 'New', //todo
         generateDataUrl: function() {
           var url = this.options.autoCompleteOptions.url;
           var variableValue = this.getTextAreaValue();
@@ -140,8 +139,8 @@ angular.module('nag.core.defaults', [])
 
           for(x = 0; x < response.length; x += 1) {
             parsedData.push({
-              display: response[x].username,
-              value: response[x].id
+              display: response[x].display,
+              value: response[x].value
             });
           }
 

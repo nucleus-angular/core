@@ -281,8 +281,8 @@ describe('Defaults', function(){
 
           for(x = 0; x < data.length; x += 1) {
             parsedData.push({
-              display: data[x].username,
-              value: data[x].id
+              display: data[x].display,
+              value: data[x].value
             });
           }
 
