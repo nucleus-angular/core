@@ -1,12 +1,14 @@
 {
   "name": "nucleus-angular-core",
-  "version": "0.2.12",
-  "dependencies": {},
+  "version": "0.2.13",
+  "dependencies": {
+    "object-array-utility": "latest"
+  },
   "devDependencies": {
-    "jquery": "1.9.x",
+    "jquery": "2.0.2",
     "lodash": "1.2.1",
-    "angular": "1.0.6",
-    "angular-mocks": "1.0.6",
-    "unstable-angular-complete": "1.1.4"
+    "angular": "1.0.7",
+    "angular-mocks": "1.0.7",
+    "unstable-angular-complete": "1.1.5"
   }
 }
