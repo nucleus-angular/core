@@ -116,6 +116,7 @@ angular.module('nag.core.defaults', [])
         selectOnBlur: false,
         allowFreeForm: false,
         newText: 'New', //todo
+        isNew: false,
         generateDataUrl: function() {
           var url = this.options.autoCompleteOptions.url;
           var variableValue = this.getTextAreaValue();
