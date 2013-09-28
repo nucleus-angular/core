@@ -237,7 +237,6 @@ describe('Defaults', function(){
       selectOnFocus: false,
       preventSubmitOnEnter: true,
       data: [],
-      autoFocus: false,
       templateUrl: 'extend-text.html',
       template: null,
       tagOptions: {
@@ -259,10 +258,11 @@ describe('Defaults', function(){
         cache: false,
         cachedData: [],
         options: [],
-        useFilter: null,
         selectedOptionIndex: 0,
-        selectOnBlur: true,
+        selectOnBlur: false,
         allowFreeForm: false,
+        newText: 'New',
+        isNew: false,
         generateDataUrl: function() {
           var url = this.options.autoCompleteOptions.url;
           var variableValue = this.getTextAreaValue();
@@ -330,7 +330,6 @@ describe('Defaults', function(){
       selectOnFocus: false,
       preventSubmitOnEnter: true,
       data: [],
-      autoFocus: false,
       templateUrl: 'extend-text.html',
       template: null,
       tagOptions: {
@@ -352,10 +351,11 @@ describe('Defaults', function(){
         cache: false,
         cachedData: [],
         options: [],
-        useFilter: null,
         selectedOptionIndex: 0,
-        selectOnBlur: true,
+        selectOnBlur: false,
         allowFreeForm: false,
+        newText: 'New',
+        isNew: false,
         generateDataUrl: function() {
           var url = this.options.autoCompleteOptions.url;
           var variableValue = this.getTextAreaValue();

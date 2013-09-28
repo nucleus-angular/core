@@ -7,8 +7,8 @@ describe('Helper', function(){
     nagHelper = $injector.get('nagHelper');
 
     //pre load needed templates as right now $httpBackend does not have the passThrough() method (might be a bug)
-    nagHelper.getAsyncTemplate('/base/tree.html');
-    nagHelper.getAsyncTemplate('/base/recursion.html');
+    nagHelper.getAsyncTemplate('/base/tests/files/custom.html');
+    nagHelper.getAsyncTemplate('/base/tests/files/test.html');
   }));
 
   it('should resolve template path starting with / as itself', function() {

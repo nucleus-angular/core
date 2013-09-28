@@ -171,7 +171,6 @@ angular.module('nag.core.defaults', [])
       }
     };
 
-    //todo: document
     //apply override defaults
     try {
       var defaultOverrides, overrideKeys, x;
@@ -188,6 +187,8 @@ angular.module('nag.core.defaults', [])
       /**
        * Retrieves the configured root template path
        *
+       * @todo: add example
+       *
        * @method getRootTemplatePath
        *
        * @returns {string} Root template path
@@ -198,6 +199,8 @@ angular.module('nag.core.defaults', [])
 
       /**
        * Builds grid options
+       *
+       * @todo: add example
        *
        * @method getGridOptions
        *
@@ -219,6 +222,8 @@ angular.module('nag.core.defaults', [])
       /**
        * Builds grid column options
        *
+       * @todo: add example
+       *
        * @method getGridColumnOptions
        *
        * @param {object} options Overrides for the default options
@@ -239,6 +244,8 @@ angular.module('nag.core.defaults', [])
       /**
        * Builds tree options
        *
+       * @todo: add example
+       *
        * @method getTreeOptions
        *
        * @param {object} options Overrides for the default options
@@ -253,6 +260,8 @@ angular.module('nag.core.defaults', [])
 
       /**
        * Builds extend text options
+       *
+       * @todo: add example
        *
        * @method getExtendTextOptions
        *
@@ -285,6 +294,8 @@ angular.module('nag.core.defaults', [])
       /**
        * Builds tabs options
        *
+       * @todo: add example
+       *
        * @method getTabsOptions
        *
        * @param {object} options Overrides for the default options
@@ -299,6 +310,8 @@ angular.module('nag.core.defaults', [])
 
       /**
        * Builds revealing panel options
+       *
+       * @todo: add example
        *
        * @method getRevealingPanelOptions
        *
@@ -315,6 +328,8 @@ angular.module('nag.core.defaults', [])
       /**
        * Builds expander options
        *
+       * @todo: add example
+       *
        * @method getExpanderOptions
        *
        * @param {object} options Overrides for the default options
@@ -329,6 +344,8 @@ angular.module('nag.core.defaults', [])
 
       /**
        * Builds input element options
+       *
+       * @todo: add example
        *
        * @method getInputElementOptions
        *

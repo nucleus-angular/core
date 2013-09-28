@@ -14,6 +14,8 @@ angular.module('nag.core.helpers', [])
       /**
        * Retrieves a template
        *
+       * @todo: add example
+       *
        * NOTE: Right now this is using jQuery in an sync manor because of issues with the template not being ready when the data is (like in the grid component)
        * so we need to take a look at this to see if it is something that can be changes
        *
@@ -48,6 +50,8 @@ angular.module('nag.core.helpers', [])
       /**
        * Generates a unique id
        *
+       * @todo: add example
+       *
        * @method generateId
        *
        * @param {string} [prefix=''] String to prefix the id
@@ -62,6 +66,8 @@ angular.module('nag.core.helpers', [])
 
       /**
        * Retrieves a template string using either the template or templateUrl property of a component's options object
+       *
+       * @todo: add example
        *
        * @method
        *

@@ -5,10 +5,8 @@
     "object-array-utility": "latest"
   },
   "devDependencies": {
-    "jquery": "2.0.2",
+    "jquery": "2.0.3",
     "lodash": "1.2.1",
-    "angular": "1.0.7",
-    "angular-mocks": "1.0.7",
-    "unstable-angular-complete": "1.1.5"
+    "unstable-angular-complete": "1.2.0rc2"
   }
 }

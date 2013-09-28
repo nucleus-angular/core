@@ -1,8 +1,18 @@
-//shortcut modules
+/**
+ * Provide low level functionality that multiple Nucleus Angular components need.
+ *
+ * @module nag.core
+ */
 angular.module('nag.core', [
   'nag.core.defaults',
   'nag.core.helpers'
 ])
+/**
+ * An array of key codes that don't effect text inputs.
+ *
+ * @ngvalue noneAffectingTextKeys
+ * @type array
+ */
 .value('noneAffectingTextKeys', (function() {
   var values, x;
 
