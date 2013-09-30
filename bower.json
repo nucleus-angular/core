@@ -2,7 +2,7 @@
   "name": "nucleus-angular-core",
   "version": "0.2.14",
   "dependencies": {
-    "object-array-utility": "latest"
+    "object-array-utility": "master"
   },
   "devDependencies": {
     "jquery": "2.0.3",
