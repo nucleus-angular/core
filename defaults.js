@@ -1,5 +1,7 @@
 /**
- * Handles generating defaults for Nucleus Angular
+ * # Nucleus Angular Defaults
+ *
+ * This service is responsible for make sure that other Nucleus Angular components will be supplemented with defualt configuration values when not explicitly provided.
  *
  * @module nag.core
  * @ngservice nagDefaults

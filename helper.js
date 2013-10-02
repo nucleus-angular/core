@@ -1,5 +1,7 @@
 /**
- * General helper classes for Nucleus Angular
+ * # Nucleus Angular Helper
+ *
+ * Provide general helper functionality that is used in several Nucleus Angular components.
  *
  * @module nag.core
  * @ngservice nagHelper

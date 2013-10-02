@@ -1,5 +1,7 @@
 /**
- * Provide low level functionality that multiple Nucleus Angular components need.
+ * # Nucleus Angular Core
+ *
+ * This core module provide low level functionality that is use by several other Nucleus Angular components.
  *
  * @module nag.core
  */
