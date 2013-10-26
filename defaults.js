@@ -1,15 +1,31 @@
 /**
  * # Nucleus Angular Defaults
  *
- * This service is responsible for make sure that other Nucleus Angular components will be supplemented with defualt configuration values when not explicitly provided.
+ * This service is responsible for make sure that other Nucleus Angular components will be supplemented with default configuration values when not explicitly provided.
+ *
+ * @todo: move all default setup (setting the defaults and custom getter functions) to the compoments themselves
  *
  * @module nag.core
  * @ngservice nagDefaults
  */
 angular.module('nag.core.defaults', [])
-.factory('nagDefaults', [
+.provider('nagDefaults', [
   '$injector',
   function($injector) {
+    var optionGetters = {};
+    var getDefaultOptions = function(optionItem) {
+      return _.clone(defaults[optionItem], true);
+    };
+    var getOptions = function(optionItem, options) {
+      if(_.isFunction(optionGetters[optionItem])) {
+        return optionGetters[optionItem](options);
+      } else {
+        var finalOptions = getDefaultOptions(optionItem);
+        angular.extend(finalOptions, options);
+        return finalOptions;
+      }
+    };
+
     var rootTemplatePath;
 
     //todo: document
@@ -170,6 +186,13 @@ angular.module('nag.core.defaults', [])
       },
       inputElement: {
         isPlain: true
+      },
+      contentPlayer: {
+        items: [],
+        allowSelection: true,
+        allowSeeking: true,
+        latestItemCompleted: -1,
+        contentStatusProperty: false
       }
     };
 
@@ -185,181 +208,206 @@ angular.module('nag.core.defaults', [])
     }
     catch(exception) {}
 
+
+
+
+
     return {
-      /**
-       * Retrieves the configured root template path
-       *
-       * @todo: add example
-       *
-       * @method getRootTemplatePath
-       *
-       * @returns {string} Root template path
-       */
-      getRootTemplatePath: function() {
-        return rootTemplatePath;
-      },
+      $get: function() {
+        return {
+          /**
+           * Retrieves the configured root template path
+           *
+           * @todo: add example
+           *
+           * @method getRootTemplatePath
+           *
+           * @returns {string} Root template path
+           */
+          getRootTemplatePath: function() {
+            return rootTemplatePath;
+          },
 
-      /**
-       * Builds grid options
-       *
-       * @todo: add example
-       *
-       * @method getGridOptions
-       *
-       * @param {object} options Overrides for the default options
-       *
-       * @returns {object} The default options merged with the passed options
-       */
-      getGridOptions: function(options) {
-        var gripOptions = _.clone(defaults.grid, true);
-        var newOptions = angular.extend(gripOptions, options);
+          /**
+           * Builds grid options
+           *
+           * @todo: add example
+           *
+           * @method getGridOptions
+           *
+           * @param {object} options Overrides for the default options
+           *
+           * @returns {object} The default options merged with the passed options
+           */
+          getGridOptions: function(options) {
+            var gripOptions = _.clone(defaults.grid, true);
+            var newOptions = angular.extend(gripOptions, options);
 
-        if(angular.isArray(options.columnModel) && options.columnModel.length > 0) {
-            options.columnModel = this.getGridColumnOptions(options.columnModel);
+            if(angular.isArray(options.columnModel) && options.columnModel.length > 0) {
+              options.columnModel = this.getGridColumnOptions(options.columnModel);
+            }
+
+            return newOptions;
+          },
+
+          /**
+           * Builds grid column options
+           *
+           * @todo: add example
+           *
+           * @method getGridColumnOptions
+           *
+           * @param {object} options Overrides for the default options
+           *
+           * @returns {object} The default options merged with the passed options
+           */
+          getGridColumnOptions: function(columnModel) {
+            var gridColumnOptions = _.clone(defaults.gridColumnModel, true);
+
+            angular.forEach(columnModel, function(value, key) {
+              //todo: research: this breaks without the JSON.parse(angular.toJson()), no idea why
+              columnModel[key] = angular.extend(JSON.parse(angular.toJson(gridColumnOptions)), columnModel[key]);
+            });
+
+            return columnModel;
+          },
+
+          /**
+           * Builds tree options
+           *
+           * @todo: add example
+           *
+           * @method getTreeOptions
+           *
+           * @param {object} options Overrides for the default options
+           *
+           * @returns {object} The default options merged with the passed options
+           */
+          getTreeOptions: function(options) {
+            var treeOptions = _.clone(defaults.tree, true);
+            angular.extend(treeOptions, options);
+            return treeOptions;
+          },
+
+          /**
+           * Builds extend text options
+           *
+           * @todo: add example
+           *
+           * @method getExtendTextOptions
+           *
+           * @param {object} options Overrides for the default options
+           *
+           * @returns {object} The default options merged with the passed options
+           */
+          getExtendTextOptions: function(options) {
+            var extendTextDefaults = _.clone(defaults.extendText, true);
+            var extendTextTagDefaults = _.clone(defaults.extendTextTagOptions, true);
+            var extendTextAutoCompleteDefaults = _.clone(defaults.extendTextAutoCompleteOptions, true);
+
+            var results = angular.extend(extendTextDefaults, options);
+
+            if(results.tagOptions) {
+              results.tagOptions = angular.extend(extendTextTagDefaults, results.tagOptions);
+            } else {
+              results.tagOptions = defaults.extendTextTagOptions
+            }
+
+            if(results.autoCompleteOptions) {
+              results.autoCompleteOptions = angular.extend(extendTextAutoCompleteDefaults, results.autoCompleteOptions);
+            } else {
+              results.autoCompleteOptions = defaults.extendTextAutoCompleteOptions
+            }
+
+            return results;
+          },
+
+          /**
+           * Builds tabs options
+           *
+           * @todo: add example
+           *
+           * @method getTabsOptions
+           *
+           * @param {object} options Overrides for the default options
+           *
+           * @returns {object} The default options merged with the passed options
+           */
+          getTabsOptions: function(options) {
+            var finalOptions = _.clone(defaults.tabs, true);
+            angular.extend(finalOptions, options);
+            return finalOptions;
+          },
+
+          /**
+           * Builds revealing panel options
+           *
+           * @todo: add example
+           *
+           * @method getRevealingPanelOptions
+           *
+           * @param {object} options Overrides for the default options
+           *
+           * @returns {object} The default options merged with the passed options
+           */
+          getRevealingPanelOptions: function(options) {
+            var finalOptions = _.clone(defaults.revealingPanel, true);
+            angular.extend(finalOptions, options);
+            return finalOptions;
+          },
+
+          /**
+           * Builds expander options
+           *
+           * @todo: add example
+           *
+           * @method getExpanderOptions
+           *
+           * @param {object} options Overrides for the default options
+           *
+           * @returns {object} The default options merged with the passed options
+           */
+          getExpanderOptions: function(options) {
+            var finalOptions = _.clone(defaults.expander, true);
+            angular.extend(finalOptions, options);
+            return finalOptions;
+          },
+
+          /**
+           * Builds input element options
+           *
+           * @todo: add example
+           *
+           * @method getInputElementOptions
+           *
+           * @param {object} options Overrides for the default options
+           *
+           * @returns {object} The default options merged with the passed options
+           */
+          getInputElementOptions: function(options) {
+            var finalOptions = _.clone(defaults.inputElement, true);
+            angular.extend(finalOptions, options);
+            return finalOptions;
+          },
+
+          getOptions: getOptions
         }
-
-        return newOptions;
       },
-
       /**
-       * Builds grid column options
+       * # Nag Defaults Provider Component
        *
-       * @todo: add example
+       * The provider allows you to configure default options
        *
-       * @method getGridColumnOptions
-       *
-       * @param {object} options Overrides for the default options
-       *
-       * @returns {object} The default options merged with the passed options
+       * @ngservice nagDefaultsProvider
        */
-      getGridColumnOptions: function(columnModel) {
-        var gridColumnOptions = _.clone(defaults.gridColumnModel, true);
-
-        angular.forEach(columnModel, function(value, key) {
-          //todo: research: this breaks without the JSON.parse(angular.toJson()), no idea why
-          columnModel[key] = angular.extend(JSON.parse(angular.toJson(gridColumnOptions)), columnModel[key]);
-        });
-
-        return columnModel;
+      setOptions: function(optionItem, defaultOptions) {
+        defaults[optionItem] = defaultOptions;
       },
-
-      /**
-       * Builds tree options
-       *
-       * @todo: add example
-       *
-       * @method getTreeOptions
-       *
-       * @param {object} options Overrides for the default options
-       *
-       * @returns {object} The default options merged with the passed options
-       */
-      getTreeOptions: function(options) {
-        var treeOptions = _.clone(defaults.tree, true);
-        angular.extend(treeOptions, options);
-        return treeOptions;
+      setOptionsGetter: function(optionItem, getter) {
+        optionGetters[optionItem] = getter;
       },
-
-      /**
-       * Builds extend text options
-       *
-       * @todo: add example
-       *
-       * @method getExtendTextOptions
-       *
-       * @param {object} options Overrides for the default options
-       *
-       * @returns {object} The default options merged with the passed options
-       */
-      getExtendTextOptions: function(options) {
-        var extendTextDefaults = _.clone(defaults.extendText, true);
-        var extendTextTagDefaults = _.clone(defaults.extendTextTagOptions, true);
-        var extendTextAutoCompleteDefaults = _.clone(defaults.extendTextAutoCompleteOptions, true);
-
-        var results = angular.extend(extendTextDefaults, options);
-
-        if(results.tagOptions) {
-          results.tagOptions = angular.extend(extendTextTagDefaults, results.tagOptions);
-        } else {
-          results.tagOptions = defaults.extendTextTagOptions
-        }
-
-        if(results.autoCompleteOptions) {
-          results.autoCompleteOptions = angular.extend(extendTextAutoCompleteDefaults, results.autoCompleteOptions);
-        } else {
-          results.autoCompleteOptions = defaults.extendTextAutoCompleteOptions
-        }
-
-        return results;
-      },
-
-      /**
-       * Builds tabs options
-       *
-       * @todo: add example
-       *
-       * @method getTabsOptions
-       *
-       * @param {object} options Overrides for the default options
-       *
-       * @returns {object} The default options merged with the passed options
-       */
-      getTabsOptions: function(options) {
-        var finalOptions = _.clone(defaults.tabs, true);
-        angular.extend(finalOptions, options);
-        return finalOptions;
-      },
-
-      /**
-       * Builds revealing panel options
-       *
-       * @todo: add example
-       *
-       * @method getRevealingPanelOptions
-       *
-       * @param {object} options Overrides for the default options
-       *
-       * @returns {object} The default options merged with the passed options
-       */
-      getRevealingPanelOptions: function(options) {
-        var finalOptions = _.clone(defaults.revealingPanel, true);
-        angular.extend(finalOptions, options);
-        return finalOptions;
-      },
-
-      /**
-       * Builds expander options
-       *
-       * @todo: add example
-       *
-       * @method getExpanderOptions
-       *
-       * @param {object} options Overrides for the default options
-       *
-       * @returns {object} The default options merged with the passed options
-       */
-      getExpanderOptions: function(options) {
-        var finalOptions = _.clone(defaults.expander, true);
-        angular.extend(finalOptions, options);
-        return finalOptions;
-      },
-
-      /**
-       * Builds input element options
-       *
-       * @todo: add example
-       *
-       * @method getInputElementOptions
-       *
-       * @param {object} options Overrides for the default options
-       *
-       * @returns {object} The default options merged with the passed options
-       */
-      getInputElementOptions: function(options) {
-        var finalOptions = _.clone(defaults.inputElement, true);
-        angular.extend(finalOptions, options);
-        return finalOptions;
-      }
-    }
+      getDefaultOptions: getDefaultOptions,
+      getOptions: getOptions
+    };
   }
 ]);

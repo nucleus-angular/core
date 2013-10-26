@@ -1,7 +1,10 @@
 describe('Defaults', function(){
-  var nagDefaults;
+  var nagDefaults, provider;
 
-  beforeEach(module('nag.core'));
+  //I might be able to clean these two beforeEachs to one
+  beforeEach(module('nag.core', function(nagDefaultsProvider) {
+    provider = nagDefaultsProvider;
+  }));
 
   beforeEach(inject(function($injector) {
     nagDefaults = $injector.get('nagDefaults');
@@ -11,494 +14,99 @@ describe('Defaults', function(){
     expect(nagDefaults.getRootTemplatePath()).toEqual('components');
   });
 
-  it('should have correct defaults for grid', function() {
-    var expected = {
-      rootTemplatePath: nagDefaults.getRootTemplatePath() + '/nucleus-angular-grid/assets/templates',
-      caption: null,
-      columnModel: {},
-      currentPage: 1,
-      data: [],
-      displaySettings: false,
-      filters: null,
-      generateDataUrl: function(){},
-      itemsPerPageOptions: [10, 20, 30, 40, 50],
-      itemsPerPage: 10,
-      maxColumnWidth: 0,
-      minColumnWidth: 50,
-      remoteDataMethod: 'GET',
-      reorderable: false,
-      rowMultiSelect: true,
-      rowSelectable: false,
-      rowSelectableCheckbox: true,
-      rowSelectionMode: 'row',
-      headerTemplateUrl: 'header.html',
-      headerTemplate: null,
-      footerTemplateUrl: 'footer.html',
-      footerTemplate: null,
-      settingsTemplateUrl: 'settings.html',
-      settingsTemplate: null,
-      loadingTemplateUrl: 'loading.html',
-      loadingTemplate: null,
-      dataTemplateUrl: 'data.html',
-      dataTemplate: null,
-      actionsTemplateUrl: 'actions.html',
-      actionsTemplate: null,
-      rowShiftMultiSelect: false,
-      selected: [],
-      sort: {},
-      sortDirection: 'asc',
-      sortMulti: true,
-      sortProperty: null,
-      totalRecords: 0,
-      templateUrl: 'grid.html',
-      template: null
-    }
-    var actual = nagDefaults.getGridOptions({});
-
-    expect(_.isFunction(actual['generateDataUrl'])).toBe(true);
-
-    delete actual['generateDataUrl'];
-    delete expected['generateDataUrl'];
-
-    expect(actual).toEqual(expected);
-  });
-
-  it('should not overwrite stored default settings for grid when retrieving defaults with a none empty object', function() {
-    nagDefaults.getGridOptions({caption: 'test'});
-
-    var expected = {
-      rootTemplatePath: nagDefaults.getRootTemplatePath() + '/nucleus-angular-grid/assets/templates',
-      caption: null,
-      columnModel: {},
-      currentPage: 1,
-      data: [],
-      displaySettings: false,
-      filters: null,
-      generateDataUrl: function(){},
-      itemsPerPageOptions: [10, 20, 30, 40, 50],
-      itemsPerPage: 10,
-      maxColumnWidth: 0,
-      minColumnWidth: 50,
-      remoteDataMethod: 'GET',
-      reorderable: false,
-      rowMultiSelect: true,
-      rowSelectable: false,
-      rowSelectableCheckbox: true,
-      rowSelectionMode: 'row',
-      headerTemplateUrl: 'header.html',
-      headerTemplate: null,
-      footerTemplateUrl: 'footer.html',
-      footerTemplate: null,
-      settingsTemplateUrl: 'settings.html',
-      settingsTemplate: null,
-      loadingTemplateUrl: 'loading.html',
-      loadingTemplate: null,
-      dataTemplateUrl: 'data.html',
-      dataTemplate: null,
-      actionsTemplateUrl: 'actions.html',
-      actionsTemplate: null,
-      rowShiftMultiSelect: false,
-      selected: [],
-      sort: {},
-      sortDirection: 'asc',
-      sortMulti: true,
-      sortProperty: null,
-      totalRecords: 0,
-      templateUrl: 'grid.html',
-      template: null
-    }
-    var actual = nagDefaults.getGridOptions({});
-
-    expect(_.isFunction(actual['generateDataUrl'])).toBe(true);
-
-    delete actual['generateDataUrl'];
-    delete expected['generateDataUrl'];
-
-    expect(actual).toEqual(expected);
-  });
-
-  it('should have correct defaults for grid column', function() {
-    var expected = {
-      test: {
-        rootTemplatePath: nagDefaults.getRootTemplatePath() + '/nucleus-angular-grid/assets/templates',
-        title: null,
-        property: null,
-        headerTemplateUrl: 'header-data-cell.html',
-        headerTemplate: null,
-        templateUrl: 'data-cell.html',
-        template: null,
-        display: true,
-        sortable: false,
-        resizable: true,
-        filterable: false,
-        width: 0,
-        minWidth: 0,
-        maxWidth: 0,
-        cssClass: '',
-        cssHeaderClass: ''
-      }
-    };
-    expect(nagDefaults.getGridColumnOptions({'test': {}})).toEqual(expected);
-  });
-
-  it('should not overwrite stored default settings for grid column when retrieving defaults with a none empty object', function() {
-    nagDefaults.getGridColumnOptions({'test': {display: false}});
-
-    var expected = {
-      test: {
-        rootTemplatePath: nagDefaults.getRootTemplatePath() + '/nucleus-angular-grid/assets/templates',
-        title: null,
-        property: null,
-        headerTemplateUrl: 'header-data-cell.html',
-        headerTemplate: null,
-        templateUrl: 'data-cell.html',
-        template: null,
-        display: true,
-        sortable: false,
-        resizable: true,
-        filterable: false,
-        width: 0,
-        minWidth: 0,
-        maxWidth: 0,
-        cssClass: '',
-        cssHeaderClass: ''
-      }
-    };
-    expect(nagDefaults.getGridColumnOptions({'test': {}})).toEqual(expected);
-  });
-
-  it('should have correct defaults for grid column with multiple items', function() {
-    var expected = {
-      test: {
-        rootTemplatePath: nagDefaults.getRootTemplatePath() + '/nucleus-angular-grid/assets/templates',
-        title: null,
-        property: null,
-        headerTemplateUrl: 'header-data-cell.html',
-        headerTemplate: null,
-        templateUrl: 'data-cell.html',
-        template: null,
-        display: true,
-        sortable: false,
-        resizable: true,
-        filterable: false,
-        width: 0,
-        minWidth: 0,
-        maxWidth: 0,
-        cssClass: '',
-        cssHeaderClass: ''
-      },
-      test2: {
-        rootTemplatePath: nagDefaults.getRootTemplatePath() + '/nucleus-angular-grid/assets/templates',
-        title: null,
-        property: null,
-        headerTemplateUrl: 'header-data-cell.html',
-        headerTemplate: null,
-        templateUrl: 'data-cell.html',
-        template: null,
-        display: true,
-        sortable: false,
-        resizable: true,
-        filterable: false,
-        width: 0,
-        minWidth: 0,
-        maxWidth: 0,
-        cssClass: '',
-        cssHeaderClass: ''
-      }
-    };
-    expect(nagDefaults.getGridColumnOptions({test: {}, test2: {}})).toEqual(expected);
-  });
-
-  it('should have correct defaults for tree', function() {
-    var expected = {
-      rootTemplatePath: nagDefaults.getRootTemplatePath() + '/nucleus-angular-tree/assets/templates',
-      templateUrl: 'tree.html',
-      recursionTemplateUrl: 'recursion.html',
-      data: []
-    }
-    expect(nagDefaults.getTreeOptions({})).toEqual(expected);
-  });
-
-  it('should not overwrite stored default settings for tree when retrieving defaults with a none empty object', function() {
-    nagDefaults.getTreeOptions({templateUrl: 'test.html'});
-
-    var expected = {
-      rootTemplatePath: nagDefaults.getRootTemplatePath() + '/nucleus-angular-tree/assets/templates',
-      templateUrl: 'tree.html',
-      recursionTemplateUrl: 'recursion.html',
-      data: []
-    }
-    expect(nagDefaults.getTreeOptions({})).toEqual(expected);
-  });
-
-  it('should have correct defaults for extend text', function() {
-    var expected = {
-      rootTemplatePath: nagDefaults.getRootTemplatePath() + '/nucleus-angular-extend-text/assets/templates',
-      selectOnFocus: false,
-      preventSubmitOnEnter: true,
-      data: [],
-      templateUrl: 'extend-text.html',
-      template: null,
-      tagOptions: {
-        rootTemplatePath: nagDefaults.getRootTemplatePath() + '/nucleus-angular-extend-text/assets/templates',
-        enabled: false,
-        allowDuplicates: false,
-        selectedTagIndex: null,
-        doubleClickEdit: false
-      },
-      autoCompleteOptions: {
-        rootTemplatePath: nagDefaults.getRootTemplatePath() + '/nucleus-angular-extend-text/assets/templates',
-        enabled: false,
-        display: false,
-        url: null,
-        variable: 'input',
-        variableCache: null,
-        loadCharacterCount: 3,
-        searchDelay: 350,
-        cache: false,
-        cachedData: [],
-        options: [],
-        selectedOptionIndex: 0,
-        selectOnBlur: false,
-        allowFreeForm: false,
-        newText: 'New',
-        isNew: false,
-        generateDataUrl: function() {
-          var url = this.options.autoCompleteOptions.url;
-          var variableValue = this.getTextAreaValue();
-          this.options.autoCompleteOptions.variableCache = this.getTextAreaValue();
-          url += (url.indexOf('?') === -1 ? '?' : '&');
-          url += this.options.autoCompleteOptions.variable + '=' + this.options.autoCompleteOptions.formatVariable(variableValue);
-
-          return url + '&callback=JSON_CALLBACK';
-        },
-        remoteDataMethod: 'GET',
-        loadingData: false,
-
-        responseParser: function(data) {
-          var parsedData, x;
-          parsedData = [];
-
-          for(x = 0; x < data.length; x += 1) {
-            parsedData.push({
-              display: data[x].display,
-              value: data[x].value
-            });
-          }
-
-          return parsedData;
-        },
-        formatVariable: function(variable) {
-          return variable;
-        },
-        filter: function(){} //todo
-      }
-    }
-
-    var actual = nagDefaults.getExtendTextOptions({});
-
-    expect(_.isFunction(actual['autoCompleteOptions']['generateDataUrl'])).toBe(true);
-    expect(_.isFunction(actual['autoCompleteOptions']['responseParser'])).toBe(true);
-    expect(_.isFunction(actual['autoCompleteOptions']['formatVariable'])).toBe(true);
-    expect(_.isFunction(actual['autoCompleteOptions']['filter'])).toBe(true);
-
-    delete actual['autoCompleteOptions']['generateDataUrl'];
-    delete actual['autoCompleteOptions']['responseParser'];
-    delete actual['autoCompleteOptions']['formatVariable'];
-    delete actual['autoCompleteOptions']['filter'];
-    delete expected['autoCompleteOptions']['generateDataUrl'];
-    delete expected['autoCompleteOptions']['responseParser'];
-    delete expected['autoCompleteOptions']['formatVariable'];
-    delete expected['autoCompleteOptions']['filter'];
-
-    expect(actual).toEqual(expected);
-  });
-
-  it('should not overwrite stored default settings for extend text when retrieving defaults with a none empty object', function() {
-    nagDefaults.getExtendTextOptions({
-      autoFocus: true,
-      tagOptions: {
-        enabled: true
-      },
-      autoCompleteOptions: {
-        enabled: true
-      }
+  it('should be able to set option with provider and get options', function() {
+    provider.setOptions('test1', {
+      one: 1,
+      two: 2,
+      three: 3
     });
 
-    var expected = {
-      rootTemplatePath: nagDefaults.getRootTemplatePath() + '/nucleus-angular-extend-text/assets/templates',
-      selectOnFocus: false,
-      preventSubmitOnEnter: true,
-      data: [],
-      templateUrl: 'extend-text.html',
-      template: null,
-      tagOptions: {
-        rootTemplatePath: nagDefaults.getRootTemplatePath() + '/nucleus-angular-extend-text/assets/templates',
-        enabled: false,
-        allowDuplicates: false,
-        selectedTagIndex: null,
-        doubleClickEdit: false
-      },
-      autoCompleteOptions: {
-        rootTemplatePath: nagDefaults.getRootTemplatePath() + '/nucleus-angular-extend-text/assets/templates',
-        enabled: false,
-        display: false,
-        url: null,
-        variable: 'input',
-        variableCache: null,
-        loadCharacterCount: 3,
-        searchDelay: 350,
-        cache: false,
-        cachedData: [],
-        options: [],
-        selectedOptionIndex: 0,
-        selectOnBlur: false,
-        allowFreeForm: false,
-        newText: 'New',
-        isNew: false,
-        generateDataUrl: function() {
-          var url = this.options.autoCompleteOptions.url;
-          var variableValue = this.getTextAreaValue();
-          this.options.autoCompleteOptions.variableCache = this.getTextAreaValue();
-          url += (url.indexOf('?') === -1 ? '?' : '&');
-          url += this.options.autoCompleteOptions.variable + '=' + this.options.autoCompleteOptions.formatVariable(variableValue);
+    var options = {};
+    options = nagDefaults.getOptions('test1', options);
 
-          return url + '&callback=JSON_CALLBACK';
-        },
-        remoteDataMethod: 'GET',
-        loadingData: false,
+    expect(options.one).toBe(1);
+    expect(options.two).toBe(2);
+    expect(options.three).toBe(3);
+  });
 
-        responseParser: function(data) {
-          var parsedData, x;
-          parsedData = [];
+  it('should properly override settings when given', function() {
+    provider.setOptions('test1', {
+      one: 1,
+      two: 2,
+      three: 3
+    });
 
-          for(x = 0; x < data.length; x += 1) {
-            parsedData.push({
-              display: data[x].username,
-              value: data[x].id
-            });
-          }
+    var options = {
+      one: 'one'
+    };
+    options = nagDefaults.getOptions('test1', options);
 
-          return parsedData;
-        },
-        formatVariable: function(variable) {
-          return variable;
-        },
-        filter: function(){} //todo
+    expect(options.one).toBe('one');
+    expect(options.two).toBe(2);
+    expect(options.three).toBe(3);
+  });
+
+  it('should not override the stored defaults when retrieving defaults', function() {
+    provider.setOptions('test1', {
+      one: 1,
+      two: 2,
+      three: 3
+    });
+
+    nagDefaults.getOptions('test1', {
+      one: 'one'
+    });
+    var options2 = nagDefaults.getOptions('test1', {});
+
+    expect(options2.one).toBe(1);
+  });
+
+  it('should be able to define a custom get function for a certain item', function() {
+    provider.setOptions('test1', {
+      one: 1,
+      two: 2,
+      three: 3,
+      stuff: []
+    });
+    provider.setOptions('test2', {
+      four: 4,
+      five: 5,
+      six: 6
+    });
+    provider.setOptionsGetter('test1', function(options) {
+      var finalOptions = provider.getDefaultOptions('test1');
+      finalOptions = angular.extend(finalOptions, options);
+
+      if(angular.isArray(finalOptions.stuff) && finalOptions.stuff.length > 0) {
+        finalOptions.stuff = provider.getOptions('test2', finalOptions.stuff);
       }
-    }
 
-    var actual = nagDefaults.getExtendTextOptions({});
+      return finalOptions;
+    });
+    provider.setOptionsGetter('test2', function(options) {
+      var stuffOptions = provider.getDefaultOptions('test2');
 
-    expect(_.isFunction(actual['autoCompleteOptions']['generateDataUrl'])).toBe(true);
-    expect(_.isFunction(actual['autoCompleteOptions']['responseParser'])).toBe(true);
-    expect(_.isFunction(actual['autoCompleteOptions']['formatVariable'])).toBe(true);
-    expect(_.isFunction(actual['autoCompleteOptions']['filter'])).toBe(true);
+      angular.forEach(options, function(value, key) {
+        //todo: research: this breaks without the JSON.parse(angular.toJson()), no idea why
+        options[key] = angular.extend(JSON.parse(angular.toJson(stuffOptions)), options[key]);
+      });
 
-    delete actual['autoCompleteOptions']['generateDataUrl'];
-    delete actual['autoCompleteOptions']['responseParser'];
-    delete actual['autoCompleteOptions']['formatVariable'];
-    delete actual['autoCompleteOptions']['filter'];
-    delete expected['autoCompleteOptions']['generateDataUrl'];
-    delete expected['autoCompleteOptions']['responseParser'];
-    delete expected['autoCompleteOptions']['formatVariable'];
-    delete expected['autoCompleteOptions']['filter'];
-
-    expect(actual).toEqual(expected);
-  });
-
-  it('the data for the extend text should be be shared accross multiple instances', function() {
-    var options1 = nagDefaults.getExtendTextOptions({});
-    var options2 = nagDefaults.getExtendTextOptions({});
-
-    options1.data.push({value: 'test', display: 'Test'});
-
-    expect(options1.data).toEqual([{value: 'test', display: 'Test'}]);
-    expect(options2.data).toEqual([]);
-  });
-
-  it('should have correct defaults for tabs', function() {
-    var expected = {
-      defaultTab: 0
-    };
-
-    expect(nagDefaults.getTabsOptions({})).toEqual(expected);
-  });
-
-  it('should not overwrite stored default settings for tabs when retrieving defaults with a none empty object', function() {
-    var expected = {
-      defaultTab: 0
-    };
-
-    nagDefaults.getTabsOptions({defaultTab: 1});
-
-    expect(nagDefaults.getTabsOptions({})).toEqual(expected);
-  });
-
-  it('should have correct defaults for reveal panel', function() {
-    var expected = {
-      rootTemplatePath: '',
-      contentTemplateUrl: null,
-      position: 'right',
-      escapeClose: true,
-      hasOverlay: true,
-      overlayClickClose: false
-    };
-
-    expect(nagDefaults.getRevealingPanelOptions({})).toEqual(expected);
-  });
-
-  it('should not overwrite stored default settings for reveal panel when retrieving defaults with a none empty object', function() {
-    var expected = {
-      rootTemplatePath: '',
-      contentTemplateUrl: null,
-      position: 'right',
-      escapeClose: true,
-      hasOverlay: true,
-      overlayClickClose: false
-    };
-
-    nagDefaults.getRevealingPanelOptions({position: 'center'});
-
-    expect(nagDefaults.getRevealingPanelOptions({})).toEqual(expected);
-  });
-
-  it('should have correct defaults for expander', function() {
-    var expected = {
-      style: null
-    };
-
-    expect(nagDefaults.getExpanderOptions({})).toEqual(expected);
-  });
-
-  it('should not overwrite stored default settings for expander when retrieving defaults with a none empty object', function() {
-    nagDefaults.getExpanderOptions({
-      style: 'test'
+      return options;
     });
 
-    var expected = {
-      style: null
+    var options = {
+      stuff: [{
+
+      }, {
+
+      }, {
+
+      }]
     };
+    options = nagDefaults.getOptions('test1', options);
 
-    expect(nagDefaults.getExpanderOptions({})).toEqual(expected);
-  });
-
-  it('should have correct defaults for input element', function() {
-    var expected = {
-      isPlain: true
-    };
-
-    expect(nagDefaults.getInputElementOptions({})).toEqual(expected);
-  });
-
-  it('should not overwrite stored default settings for input element when retrieving defaults with a none empty object', function() {
-    nagDefaults.getInputElementOptions({
-      isPlain: false
-    });
-    var expected = {
-      isPlain: true
-    };
-
-    expect(nagDefaults.getInputElementOptions({})).toEqual(expected);
+    expect(options.stuff[0].four).toBe(4);
+    expect(options.stuff[0].five).toBe(5);
+    expect(options.stuff[0].six).toBe(6);
   });
 });
