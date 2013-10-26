@@ -1,9 +1,7 @@
 {
   "name": "nucleus-angular-core",
   "version": "0.2.14",
-  "dependencies": {
-    "object-array-utility": "master"
-  },
+  "dependencies": {},
   "devDependencies": {
     "jquery": "2.0.3",
     "lodash": "1.2.1",
