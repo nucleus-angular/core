@@ -1,3 +1,6 @@
+/**
+ * @todo: figure out how to test overriding root template path
+ */
 describe('Defaults', function(){
   var nagDefaults, provider;
 

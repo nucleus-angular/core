@@ -26,16 +26,8 @@ angular.module('nag.core.defaults', [])
       }
     };
 
-    var rootTemplatePath;
-
-    //todo: document
     //figure out the default root template path
-    try {
-      rootTemplatePath = $injector.get('nag.rootTemplatePath');
-    }
-    catch(exception) {
-      rootTemplatePath = 'components';
-    }
+    var rootTemplatePath = $injector.has('nag.rootTemplatePath') ? $injector.get('nag.rootTemplatePath') : 'components';
 
     var defaults = {
       grid: {
