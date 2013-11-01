@@ -95,73 +95,6 @@ angular.module('nag.core.defaults', [])
         recursionTemplateUrl: 'recursion.html',
         data: []
       },
-      extendText: {
-        rootTemplatePath: rootTemplatePath + '/nucleus-angular-extend-text/assets/templates',
-        selectOnFocus: false, //whether or not to select the existing text in the input when focusing
-        preventSubmitOnEnter: true,
-        data: [],
-        templateUrl: 'extend-text.html',
-        template: null
-      },
-      extendTextTagOptions: {
-        rootTemplatePath: rootTemplatePath + '/nucleus-angular-extend-text/assets/templates',
-        enabled: false,
-        allowDuplicates: false,
-        selectedTagIndex: null,
-        doubleClickEdit: false
-      },
-      extendTextAutoCompleteOptions: {
-        rootTemplatePath: rootTemplatePath + '/nucleus-angular-extend-text/assets/templates',
-        enabled: false,
-        display: false,
-        url: null,
-        variable: 'input',
-        variableCache: null, //store the last value that was used to retrieve data in order to prevent querying data when a non-changing key is pressed
-        loadCharacterCount: 3, //the number of character that must be entered before data is retrieve from a remote source
-        searchDelay: 350, //the number of milliseconds to delay retrieving remote data from the last key press
-        cache: false, //todo whether or not to cache the data from the remote server, useful for smaller datasets
-        cachedData: [], //todo
-        options: [],
-        selectedOptionIndex: 0,
-        selectOnBlur: false,
-        allowFreeForm: false,
-        newText: 'New', //todo
-        isNew: false,
-        generateDataUrl: function() {
-          var url = this.options.autoCompleteOptions.url;
-          var variableValue = this.getTextAreaValue();
-          this.options.autoCompleteOptions.variableCache = this.getTextAreaValue();
-          url += (url.indexOf('?') === -1 ? '?' : '&');
-          url += this.options.autoCompleteOptions.variable + '=' + this.options.autoCompleteOptions.formatVariable(variableValue);
-
-          if(this.options.autoCompleteOptions.remoteDataMethod === 'JSONP') {
-            url += '&callback=JSON_CALLBACK';
-          }
-
-          return url;
-        },
-        remoteDataMethod: 'GET',
-        loadingData: false,
-
-        //callbacks
-        responseParser: function(response) {
-          var parsedData, x;
-          parsedData = [];
-
-          for(x = 0; x < response.length; x += 1) {
-            parsedData.push({
-              display: response[x].display,
-              value: response[x].value
-            });
-          }
-
-          return parsedData;
-        },
-        formatVariable: function(variable) {
-          return variable;
-        },
-        filter: function(){} //todo
-      },
       tabs: {
         defaultTab: 0
       },
@@ -199,10 +132,6 @@ angular.module('nag.core.defaults', [])
       }
     }
     catch(exception) {}
-
-
-
-
 
     return {
       $get: function() {
@@ -279,39 +208,6 @@ angular.module('nag.core.defaults', [])
             var treeOptions = _.clone(defaults.tree, true);
             angular.extend(treeOptions, options);
             return treeOptions;
-          },
-
-          /**
-           * Builds extend text options
-           *
-           * @todo: add example
-           *
-           * @method getExtendTextOptions
-           *
-           * @param {object} options Overrides for the default options
-           *
-           * @returns {object} The default options merged with the passed options
-           */
-          getExtendTextOptions: function(options) {
-            var extendTextDefaults = _.clone(defaults.extendText, true);
-            var extendTextTagDefaults = _.clone(defaults.extendTextTagOptions, true);
-            var extendTextAutoCompleteDefaults = _.clone(defaults.extendTextAutoCompleteOptions, true);
-
-            var results = angular.extend(extendTextDefaults, options);
-
-            if(results.tagOptions) {
-              results.tagOptions = angular.extend(extendTextTagDefaults, results.tagOptions);
-            } else {
-              results.tagOptions = defaults.extendTextTagOptions
-            }
-
-            if(results.autoCompleteOptions) {
-              results.autoCompleteOptions = angular.extend(extendTextAutoCompleteDefaults, results.autoCompleteOptions);
-            } else {
-              results.autoCompleteOptions = defaults.extendTextAutoCompleteOptions
-            }
-
-            return results;
           },
 
           /**
@@ -399,7 +295,10 @@ angular.module('nag.core.defaults', [])
         optionGetters[optionItem] = getter;
       },
       getDefaultOptions: getDefaultOptions,
-      getOptions: getOptions
+      getOptions: getOptions,
+      getRootTemplatePath: function() {
+        return rootTemplatePath;
+      }
     };
   }
 ]);
