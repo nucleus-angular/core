@@ -95,9 +95,6 @@ angular.module('nag.core.defaults', [])
         recursionTemplateUrl: 'recursion.html',
         data: []
       },
-      tabs: {
-        defaultTab: 0
-      },
       revealingPanel: {
         rootTemplatePath: '',
         contentTemplateUrl: null,
@@ -208,23 +205,6 @@ angular.module('nag.core.defaults', [])
             var treeOptions = _.clone(defaults.tree, true);
             angular.extend(treeOptions, options);
             return treeOptions;
-          },
-
-          /**
-           * Builds tabs options
-           *
-           * @todo: add example
-           *
-           * @method getTabsOptions
-           *
-           * @param {object} options Overrides for the default options
-           *
-           * @returns {object} The default options merged with the passed options
-           */
-          getTabsOptions: function(options) {
-            var finalOptions = _.clone(defaults.tabs, true);
-            angular.extend(finalOptions, options);
-            return finalOptions;
           },
 
           /**

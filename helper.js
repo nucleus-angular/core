@@ -112,6 +112,18 @@ angular.module('nag.core.helpers', [])
         return (templatePath.indexOf('./') !== 0 && templatePath.indexOf('/') !== 0
         ? rootPath + templatePath
         : templatePath);
+      },
+
+      /**
+       * A default function that can be used to pull template urls from attributes, used as the templateUrl function for directives
+       *
+       * @method templateUrl
+       *
+       * @param {object} element DOM element
+       * @param {object} attributes Element's attributes
+       */
+      templateUrl: function(element, attributes) {
+        return attributes.template;
       }
     }
   }
