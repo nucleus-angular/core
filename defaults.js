@@ -95,14 +95,6 @@ angular.module('nag.core.defaults', [])
         recursionTemplateUrl: 'recursion.html',
         data: []
       },
-      revealingPanel: {
-        rootTemplatePath: '',
-        contentTemplateUrl: null,
-        position: 'right',
-        escapeClose: true,
-        hasOverlay: true,
-        overlayClickClose: false
-      },
       expander: {
         style: null
       },
@@ -205,23 +197,6 @@ angular.module('nag.core.defaults', [])
             var treeOptions = _.clone(defaults.tree, true);
             angular.extend(treeOptions, options);
             return treeOptions;
-          },
-
-          /**
-           * Builds revealing panel options
-           *
-           * @todo: add example
-           *
-           * @method getRevealingPanelOptions
-           *
-           * @param {object} options Overrides for the default options
-           *
-           * @returns {object} The default options merged with the passed options
-           */
-          getRevealingPanelOptions: function(options) {
-            var finalOptions = _.clone(defaults.revealingPanel, true);
-            angular.extend(finalOptions, options);
-            return finalOptions;
           },
 
           /**
