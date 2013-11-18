@@ -36,9 +36,11 @@ angular.module('nag.core.defaults', [])
         columnModel: {},
         currentPage: 1,
         data: [],
+        showSettingsToggle: true,
         displaySettings: false,
         filters: null, //todo: implement
         generateDataUrl: function(){},
+        parseResponse: null,
         itemsPerPageOptions: [10, 20, 30, 40, 50],
         itemsPerPage: 10,
         maxColumnWidth: 0,
@@ -48,37 +50,36 @@ angular.module('nag.core.defaults', [])
         rowMultiSelect: true,
         rowSelectable: false,
         rowSelectableCheckbox: true,
-        rowSelectionMode: 'row',
-        headerTemplateUrl: 'header.html',
-        headerTemplate: null,
-        footerTemplateUrl: 'footer.html',
-        footerTemplate: null,
-        settingsTemplateUrl: 'settings.html',
-        settingsTemplate: null,
-        loadingTemplateUrl: 'loading.html',
-        loadingTemplate: null,
-        dataTemplateUrl: 'data.html',
-        dataTemplate: null,
-        actionsTemplateUrl: 'actions.html',
-        actionsTemplate: null,
-        rowShiftMultiSelect: false,
+        headerTemplateUrl: 'header.html', ///
+        headerTemplate: null, ///
+        footerTemplateUrl: 'footer.html', ///
+        footerTemplate: null, ///
+        settingsTemplateUrl: 'settings.html', ///
+        settingsTemplate: null, ///
+        loadingTemplateUrl: 'loading.html', ///
+        loadingTemplate: null, ///
+        dataTemplateUrl: 'data.html', ///
+        dataTemplate: null, ///
+        actionsTemplateUrl: 'actions.html', ///
+        actionsTemplate: null, ///
+        rowKeyboardMultiSelect: false,
         selected: [],
         sort: {},
-        sortDirection: 'asc',
-        sortMulti: true,
-        sortProperty: null,
+        multiSorting: true,
         totalRecords: 0,
-        templateUrl: 'grid.html',
-        template: null
+        templateUrl: 'grid.html', ///
+        template: null, ///
+        hasActions: false,
+        selectionMode: 'row'
       },
       gridColumnModel: {
         rootTemplatePath: rootTemplatePath + '/nucleus-angular-grid/assets/templates',
         title: null,
         property: null,
-        headerTemplateUrl: 'header-data-cell.html',
-        headerTemplate: null,
-        templateUrl: 'data-cell.html',
-        template: null,
+        headerTemplateUrl: 'header-data-cell.html', ///
+        headerTemplate: null, ///
+        templateUrl: 'data-cell.html', ///
+        template: null, ///
         display: true,
         sortable: false,
         resizable: true,
