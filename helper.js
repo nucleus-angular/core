@@ -123,6 +123,9 @@ angular.module('nag.core.helpers', [])
        * @param {object} attributes Element's attributes
        */
       templateUrl: function(element, attributes) {
+        if(!attributes.template) {
+          throw new Error("This directive must have a template defined with the data-template attribute");
+        }
         return attributes.template;
       }
     }
