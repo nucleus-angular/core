@@ -3,8 +3,9 @@
   "version": "0.2.14",
   "dependencies": {},
   "devDependencies": {
-    "jquery": "2.0.3",
-    "lodash": "1.2.1",
-    "unstable-angular-complete": "1.2.0rc2"
+    "jquery": "2.x.x",
+    "lodash": "2.x.x",
+    "angular": "1.2.x",
+    "angular-mocks": "1.2.x"
   }
 }
