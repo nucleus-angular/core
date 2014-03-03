@@ -15,7 +15,7 @@ angular.module('nag.core.defaults', [])
   function($injector) {
     var optionGetters = {};
     var getDefaultOptions = function(optionItem) {
-      return _.clone(defaults[optionItem], true);
+      return defaults[optionItem] ? _.clone(defaults[optionItem], true) : {};
     };
     var getOptions = function(optionItem, options) {
       if(_.isFunction(optionGetters[optionItem])) {
@@ -29,9 +29,7 @@ angular.module('nag.core.defaults', [])
 
     //figure out the default root template path
     var rootTemplatePath = $injector.has('nag.rootTemplatePath') ? $injector.get('nag.rootTemplatePath') : 'components';
-
     var defaults = {};
-
     var defaultOverrides = {};
 
     //see if we have overrides to load up

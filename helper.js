@@ -103,7 +103,8 @@ angular.module('nag.core.helpers', [])
        * @returns {string} Resolved template file url
        */
       resolveTemplatePath: function(templatePath, options) {
-        var rootPath = (options ? options.rootTemplatePath : nagDefaults.getRootTemplatePath());
+        templatePath = templatePath || '';
+        var rootPath = (options && options.rootTemplatePath) ? options.rootTemplatePath : nagDefaults.getRootTemplatePath();
 
         if(rootPath !== '') {
             rootPath += '/';
@@ -127,6 +128,17 @@ angular.module('nag.core.helpers', [])
           throw new Error("This directive must have a template defined with the data-template attribute");
         }
         return attributes.template;
+      },
+
+      getTemplatePath: function(componentOptions, templateName) {
+        if(_.isString(componentOptions)) {
+          componentOptions = nagDefaults.getOptions(componentOptions);
+        }
+
+        var templateName = _.isString(templateName) ? 'templateUrl' : 'templateUrl';
+        var templatePath = componentOptions[templateName];
+
+        return this.resolveTemplatePath(templatePath, componentOptions);
       }
     }
   }

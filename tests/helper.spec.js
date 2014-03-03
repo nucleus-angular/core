@@ -1,10 +1,11 @@
 describe('Helper', function(){
-  var nagHelper;
+  var nagHelper, nagDefaults;
 
   beforeEach(module('nag.core'));
 
   beforeEach(inject(function($injector) {
     nagHelper = $injector.get('nagHelper');
+    nagDefaults = $injector.get('nagDefaults');
 
     //pre load needed templates as right now $httpBackend does not have the passThrough() method (might be a bug)
     nagHelper.getAsyncTemplate('/base/tests/files/custom.html');
@@ -65,5 +66,47 @@ describe('Helper', function(){
       templateUrl: '/base/tests/files/test.html',
       customTemplateUrl: '/base/tests/files/custom.html',
     }, 'customTemplateUrl', null)).toEqual('<div>custom-url</div>');
+  });
+
+  it('should get the template path', function() {
+    nagDefaults.setOptions('componentName', {
+      templateUrl: '/some/path/to/component.html'
+    });
+    nagDefaults.setOptions('componentNameRelative', {
+      templateUrl: 'some/path/to/component-relative.html'
+    });
+    nagDefaults.setOptions('componentNameWithRoot', {
+      rootTemplatePath: '/some/path/to/root',
+      templateUrl: '/some/path/to/component-root.html'
+    });
+    nagDefaults.setOptions('componentNameWithRootRelative', {
+      rootTemplatePath: '/some/path/to/root',
+      templateUrl: 'some/path/to/component-root-relative.html'
+    });
+    expect(nagHelper.getTemplatePath('componentName')).toEqual('/some/path/to/component.html');
+    
+    expect(nagHelper.getTemplatePath('componentNameRelative')).toEqual('components/some/path/to/component-relative.html');
+    
+    expect(nagHelper.getTemplatePath('componentNameWithRoot')).toEqual('/some/path/to/component-root.html');
+    
+    expect(nagHelper.getTemplatePath('componentNameWithRootRelative')).toEqual('/some/path/to/root/some/path/to/component-root-relative.html');
+    
+    expect(nagHelper.getTemplatePath({
+      templateUrl: '/some/path/to/template.html'
+    })).toEqual('/some/path/to/template.html');
+    
+    expect(nagHelper.getTemplatePath({
+      rootTemplatePath: '/some/path/to/root',
+      templateUrl: '/some/path/to/template.html'
+    })).toEqual('/some/path/to/template.html');
+    
+    expect(nagHelper.getTemplatePath({
+      templateUrl: 'some/path/to/template.html'
+    })).toEqual('components/some/path/to/template.html');
+    
+    expect(nagHelper.getTemplatePath({
+      rootTemplatePath: '/some/path/to/root',
+      templateUrl: 'some/path/to/template.html'
+    })).toEqual('/some/path/to/root/some/path/to/template.html');
   });
 });
