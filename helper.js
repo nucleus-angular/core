@@ -135,7 +135,7 @@ angular.module('nag.core.helpers', [])
           componentOptions = nagDefaults.getOptions(componentOptions);
         }
 
-        var templateName = _.isString(templateName) ? 'templateUrl' : 'templateUrl';
+        var templateName = _.isString(templateName) ? templateName + 'TemplateUrl' : 'templateUrl';
         var templatePath = componentOptions[templateName];
 
         return this.resolveTemplatePath(templatePath, componentOptions);

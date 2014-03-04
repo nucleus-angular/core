@@ -70,18 +70,22 @@ describe('Helper', function(){
 
   it('should get the template path', function() {
     nagDefaults.setOptions('componentName', {
-      templateUrl: '/some/path/to/component.html'
+      templateUrl: '/some/path/to/component.html',
+      testTemplateUrl: '/some/path/to/test-component.html'
     });
     nagDefaults.setOptions('componentNameRelative', {
-      templateUrl: 'some/path/to/component-relative.html'
+      templateUrl: 'some/path/to/component-relative.html',
+      testTemplateUrl: 'some/path/to/test-component-relative.html'
     });
     nagDefaults.setOptions('componentNameWithRoot', {
       rootTemplatePath: '/some/path/to/root',
-      templateUrl: '/some/path/to/component-root.html'
+      templateUrl: '/some/path/to/component-root.html',
+      testTemplateUrl: '/some/path/to/test-component-root.html'
     });
     nagDefaults.setOptions('componentNameWithRootRelative', {
       rootTemplatePath: '/some/path/to/root',
-      templateUrl: 'some/path/to/component-root-relative.html'
+      templateUrl: 'some/path/to/component-root-relative.html',
+      testTemplateUrl: 'some/path/to/test-component-root-relative.html'
     });
     expect(nagHelper.getTemplatePath('componentName')).toEqual('/some/path/to/component.html');
     
@@ -108,5 +112,35 @@ describe('Helper', function(){
       rootTemplatePath: '/some/path/to/root',
       templateUrl: 'some/path/to/template.html'
     })).toEqual('/some/path/to/root/some/path/to/template.html');
+
+    expect(nagHelper.getTemplatePath('componentName', 'test')).toEqual('/some/path/to/test-component.html');
+    
+    expect(nagHelper.getTemplatePath('componentNameRelative', 'test')).toEqual('components/some/path/to/test-component-relative.html');
+    
+    expect(nagHelper.getTemplatePath('componentNameWithRoot', 'test')).toEqual('/some/path/to/test-component-root.html');
+    
+    expect(nagHelper.getTemplatePath('componentNameWithRootRelative', 'test')).toEqual('/some/path/to/root/some/path/to/test-component-root-relative.html');
+    
+    expect(nagHelper.getTemplatePath({
+      templateUrl: '/some/path/to/template.html',
+      testTemplateUrl: '/some/path/to/test-component.html'
+    }, 'test')).toEqual('/some/path/to/test-component.html');
+    
+    expect(nagHelper.getTemplatePath({
+      rootTemplatePath: '/some/path/to/root',
+      templateUrl: '/some/path/to/template.html',
+      testTemplateUrl: '/some/path/to/test-component.html'
+    }, 'test')).toEqual('/some/path/to/test-component.html');
+    
+    expect(nagHelper.getTemplatePath({
+      templateUrl: 'some/path/to/template.html',
+      testTemplateUrl: 'some/path/to/test-component.html'
+    }, 'test')).toEqual('components/some/path/to/test-component.html');
+    
+    expect(nagHelper.getTemplatePath({
+      rootTemplatePath: '/some/path/to/root',
+      templateUrl: 'some/path/to/template.html',
+      testTemplateUrl: 'some/path/to/test-component.html'
+    }, 'test')).toEqual('/some/path/to/root/some/path/to/test-component.html');
   });
 });
