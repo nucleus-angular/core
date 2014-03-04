@@ -89,7 +89,7 @@ describe('Helper', function(){
     });
     expect(nagHelper.getTemplatePath('componentName')).toEqual('/some/path/to/component.html');
     
-    expect(nagHelper.getTemplatePath('componentNameRelative')).toEqual('components/some/path/to/component-relative.html');
+    expect(nagHelper.getTemplatePath('componentNameRelative')).toEqual('/components/some/path/to/component-relative.html');
     
     expect(nagHelper.getTemplatePath('componentNameWithRoot')).toEqual('/some/path/to/component-root.html');
     
@@ -106,7 +106,7 @@ describe('Helper', function(){
     
     expect(nagHelper.getTemplatePath({
       templateUrl: 'some/path/to/template.html'
-    })).toEqual('components/some/path/to/template.html');
+    })).toEqual('/components/some/path/to/template.html');
     
     expect(nagHelper.getTemplatePath({
       rootTemplatePath: '/some/path/to/root',
@@ -115,7 +115,7 @@ describe('Helper', function(){
 
     expect(nagHelper.getTemplatePath('componentName', 'test')).toEqual('/some/path/to/test-component.html');
     
-    expect(nagHelper.getTemplatePath('componentNameRelative', 'test')).toEqual('components/some/path/to/test-component-relative.html');
+    expect(nagHelper.getTemplatePath('componentNameRelative', 'test')).toEqual('/components/some/path/to/test-component-relative.html');
     
     expect(nagHelper.getTemplatePath('componentNameWithRoot', 'test')).toEqual('/some/path/to/test-component-root.html');
     
@@ -135,7 +135,7 @@ describe('Helper', function(){
     expect(nagHelper.getTemplatePath({
       templateUrl: 'some/path/to/template.html',
       testTemplateUrl: 'some/path/to/test-component.html'
-    }, 'test')).toEqual('components/some/path/to/test-component.html');
+    }, 'test')).toEqual('/components/some/path/to/test-component.html');
     
     expect(nagHelper.getTemplatePath({
       rootTemplatePath: '/some/path/to/root',

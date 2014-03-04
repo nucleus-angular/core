@@ -28,7 +28,7 @@ angular.module('nag.core.defaults', [])
     };
 
     //figure out the default root template path
-    var rootTemplatePath = $injector.has('nag.rootTemplatePath') ? $injector.get('nag.rootTemplatePath') : 'components';
+    var rootTemplatePath = $injector.has('nag.rootTemplatePath') ? $injector.get('nag.rootTemplatePath') : '/components';
     var defaults = {};
     var defaultOverrides = {};
 

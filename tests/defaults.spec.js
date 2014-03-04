@@ -8,7 +8,7 @@ describe('Defaults', function(){
   }));
 
   it('should have correct default root template path', function() {
-    expect(nagDefaults.getRootTemplatePath()).toEqual('components');
+    expect(nagDefaults.getRootTemplatePath()).toEqual('/components');
   });
 
   it('should be able to set options and get options', function() {
