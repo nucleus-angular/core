@@ -5,10 +5,7 @@
  *
  * @module nag.core
  */
-angular.module('nag.core', [
-  'nag.core.defaults',
-  'nag.core.helpers'
-])
+angular.module('nag.core', [])
 /**
  * An array of key codes that don't effect text inputs.
  *

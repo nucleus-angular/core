@@ -6,7 +6,7 @@
  * @module nag.core
  * @ngservice nagHelper
  */
-angular.module('nag.core.helpers', [])
+angular.module('nag.core')
 .factory('nagHelper', [
   '$templateCache',
   'nagDefaults',

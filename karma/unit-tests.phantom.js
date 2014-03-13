@@ -13,7 +13,9 @@ module.exports = function(config) {
       'components/angular-mocks/angular-mocks.js',
       'tests/libraries/global-defaults.js',
       'tests/libraries/mocker.js',
-      '*.js',
+      'module.js',
+      'helper-factory.js',
+      'defaults-factory.js',
       'tests/*.js',
       {
         pattern: 'tests/files/*.html', served: true, watched: false, included: false

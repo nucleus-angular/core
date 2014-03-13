@@ -9,7 +9,7 @@
  * @ngservice nagDefaults
  */
 var x = 0;
-angular.module('nag.core.defaults', [])
+angular.module('nag.core')
 .factory('nagDefaults', [
   '$injector',
   function($injector) {
