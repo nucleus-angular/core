@@ -8,7 +8,7 @@ describe('Defaults', function(){
   }));
 
   it('should have correct default root template path', function() {
-    expect(nagDefaults.getRootTemplatePath()).toEqual('/components');
+    expect(nagDefaults.getRootTemplatePath()).to.equal('/components');
   });
 
   it('should be able to set options and get options', function() {
@@ -21,9 +21,9 @@ describe('Defaults', function(){
     var options = {};
     options = nagDefaults.getOptions('test1', options);
 
-    expect(options.one).toBe(1);
-    expect(options.two).toBe(2);
-    expect(options.three).toBe(3);
+    expect(options.one).to.equal(1);
+    expect(options.two).to.equal(2);
+    expect(options.three).to.equal(3);
   });
 
   it('should properly override settings when given', function() {
@@ -38,9 +38,9 @@ describe('Defaults', function(){
     };
     options = nagDefaults.getOptions('test1', options);
 
-    expect(options.one).toBe('one');
-    expect(options.two).toBe(2);
-    expect(options.three).toBe(3);
+    expect(options.one).to.equal('one');
+    expect(options.two).to.equal(2);
+    expect(options.three).to.equal(3);
   });
 
   it('should not override the stored defaults when retrieving defaults', function() {
@@ -55,7 +55,7 @@ describe('Defaults', function(){
     });
     var options2 = nagDefaults.getOptions('test1', {});
 
-    expect(options2.one).toBe(1);
+    expect(options2.one).to.equal(1);
   });
 
   it('should be able to define a custom get function for a certain item', function() {
@@ -102,9 +102,9 @@ describe('Defaults', function(){
     };
     options = nagDefaults.getOptions('test1', options);
 
-    expect(options.stuff[0].four).toBe(4);
-    expect(options.stuff[0].five).toBe(5);
-    expect(options.stuff[0].six).toBe(6);
+    expect(options.stuff[0].four).to.equal(4);
+    expect(options.stuff[0].five).to.equal(5);
+    expect(options.stuff[0].six).to.equal(6);
   });
 
   it('should be able to set global overrides', function() {
@@ -115,6 +115,6 @@ describe('Defaults', function(){
     var options = {};
     options = nagDefaults.getOptions('overrideTest', options);
 
-    expect(options.templateUrl).toBe('global.html');
+    expect(options.templateUrl).to.equal('global.html');
   });
 });
