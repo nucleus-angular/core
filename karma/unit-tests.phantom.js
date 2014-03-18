@@ -14,6 +14,7 @@ module.exports = function(config) {
       'tests/libraries/global-defaults.js',
       'tests/libraries/mocker.js',
       'module.js',
+      'values.js',
       'helper-factory.js',
       'defaults-factory.js',
       'tests/*.js',
