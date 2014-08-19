@@ -103,6 +103,11 @@ angular.module('nag.core')
        * @returns {string} Resolved template file url
        */
       resolveTemplatePath: function(templatePath, options) {
+        //if this is not an html file, then return path as is (it is probably and inline template)
+        if(templatePath.substr(templatePath.length - 5) !== '.html') {
+          return templatePath;
+        }
+
         templatePath = templatePath || '';
         var rootPath = (options && options.rootTemplatePath) ? options.rootTemplatePath : nagDefaults.getRootTemplatePath();
 
