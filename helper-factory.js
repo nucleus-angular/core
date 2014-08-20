@@ -135,6 +135,26 @@ angular.module('nag.core')
         return attributes.template;
       },
 
+      /**
+       * A default function that can be used to either pull a template from a `data-template` attribute or from the element itself.
+       *
+       * @method  template
+       *
+       * @param {object} element DOM element
+       * @param {object} attributes Element's attributes
+       */
+      template: function(element, attributes) {
+        var template = '';
+
+        if(attributes.template) {
+          template = nagHelper.getAsyncTemplate(attributes.template);
+        } else {
+          template = element[0].innerHTML;
+        }
+
+        return template;
+      },
+
       getTemplatePath: function(componentOptions, templateName) {
         if(_.isString(componentOptions)) {
           componentOptions = nagDefaults.getOptions(componentOptions);
