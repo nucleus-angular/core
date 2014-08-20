@@ -12,7 +12,7 @@ angular.module('nag.core')
   'nagDefaults',
   function($templateCache, nagDefaults) {
     var idGeneratorNumber = 0;
-    return {
+    var nagHelper = {
       /**
        * Retrieves a template
        *
@@ -166,5 +166,7 @@ angular.module('nag.core')
         return this.resolveTemplatePath(templatePath, componentOptions);
       }
     }
+
+    return nagHelper;
   }
 ]);
