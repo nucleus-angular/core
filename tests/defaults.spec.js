@@ -122,6 +122,7 @@ describe('Defaults', function(){
     nagDefaults.setOptions('test1', {
       string: '',
       number: '',
+      numberFloat: '',
       booleanTrue: '',
       booleanFalse: '',
       shouldNotChange: 'should not change'
@@ -133,11 +134,13 @@ describe('Defaults', function(){
       $attr: {
         string: 'string',
         number: '2',
+        numberFloat: '1.23',
         booleanTrue: 'true',
         booleanFalse: 'false'
       },
       string: 'string',
       number: '2',
+      numberFloat: '1.23',
       booleanTrue: 'true',
       booleanFalse: 'false',
       dontParse: ''
@@ -146,6 +149,7 @@ describe('Defaults', function(){
     expect(options.string).to.equal('string');
     expect(options.shouldNotChange).to.equal('should not change');
     expect(options.number).to.equal(2);
+    expect(options.numberFloat).to.equal(1.23);
     expect(options.booleanTrue).to.be.true;
     expect(options.booleanFalse).to.be.false;
     expect(options.dontParse).to.be.undefined;
