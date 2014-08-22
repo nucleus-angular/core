@@ -22,6 +22,23 @@ angular.module('nag.core')
         return optionGetters[optionItem](options);
       } else {
         var finalOptions = getDefaultOptions(optionItem);
+
+        if(options && options.$attr) {
+          temp = {};
+
+          _.forEach(finalOptions, function(value, key) {
+            if(options[key] === 'true' || options[key] === 'false') {
+              temp[key] = options[key] === 'true' ? true : false;
+            } else if(!isNaN(parseInt(options[key]))) {
+              temp[key] = parseInt(options[key]);
+            } else if(options[key] !== undefined) {
+              temp[key] = options[key];
+            }
+          });
+
+          options = temp;
+        }
+
         angular.extend(finalOptions, options);
         return finalOptions;
       }

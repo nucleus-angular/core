@@ -117,4 +117,37 @@ describe('Defaults', function(){
 
     expect(options.templateUrl).to.equal('global.html');
   });
+
+  it('should be able to accept and process attribute object as overrides for default values', function() {
+    nagDefaults.setOptions('test1', {
+      string: '',
+      number: '',
+      booleanTrue: '',
+      booleanFalse: '',
+      shouldNotChange: 'should not change'
+    });
+
+    var options = {};
+    options = nagDefaults.getOptions('test1', {
+      //this is how we tell if an object is an angular attributes object
+      $attr: {
+        string: 'string',
+        number: '2',
+        booleanTrue: 'true',
+        booleanFalse: 'false'
+      },
+      string: 'string',
+      number: '2',
+      booleanTrue: 'true',
+      booleanFalse: 'false',
+      dontParse: ''
+    });
+
+    expect(options.string).to.equal('string');
+    expect(options.shouldNotChange).to.equal('should not change');
+    expect(options.number).to.equal(2);
+    expect(options.booleanTrue).to.be.true;
+    expect(options.booleanFalse).to.be.false;
+    expect(options.dontParse).to.be.undefined;
+  });
 });
